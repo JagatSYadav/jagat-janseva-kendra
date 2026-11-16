@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JAGAT JAN SEVA KENDRA — Live Cash & Transaction Ledger</title>
+  <title>JAGAT JANSEVA KENDRA — CSC ID 776350030014</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
@@ -19,12 +19,13 @@
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
           },
           colors: {
             navy: {
               800: '#1e3a8a',
-              900: '#172554',
-              950: '#0f172a',
+              900: '#0f172a',
+              950: '#060c1a',
             }
           }
         }
@@ -35,21 +36,70 @@
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f1f5f9;
+      background: linear-gradient(160deg, #eff6ff 0%, #f5f3ff 35%, #ecfdf5 70%, #fffbeb 100%);
       color: #0f172a;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .dynamic-header {
-      background: linear-gradient(125deg, #0f172a 0%, #1e3a8a 52%, #1d4ed8 100%);
+    .premium-header {
+      background: linear-gradient(125deg, #060e24 0%, #172554 38%, #1e3a8a 75%, #0f172a 100%);
       background-size: 200% 200%;
-      animation: gradientShift 12s ease infinite;
+      animation: gradientFlow 14s ease infinite;
     }
 
-    @keyframes gradientShift {
+    @keyframes gradientFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    .brand-title-gradient {
+      background: linear-gradient(90deg, #ffffff 0%, #fde047 32%, #fb923c 68%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 3px 12px rgba(251, 191, 36, 0.32));
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-card {
+      animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .animate-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px -10px rgba(15, 23, 42, 0.22);
+    }
+
+    .shine-card {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -75%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.22) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(25deg);
+      animation: cardShine 5s infinite;
+    }
+    @keyframes cardShine {
+      0% { left: -75%; }
+      35% { left: 135%; }
+      100% { left: 135%; }
     }
 
     ::-webkit-scrollbar {
@@ -61,7 +111,7 @@
       border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb {
-      background: #94a3b8;
+      background: #64748b;
       border-radius: 9999px;
     }
 
@@ -74,174 +124,112 @@
       70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
       100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
+
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #receiptPrintArea, #receiptPrintArea * {
+        visibility: visible !important;
+      }
+      #receiptPrintArea {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: #fff !important;
+        padding: 16px !important;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
   <!-- ===================================================================== -->
-  <!-- SECURE ROLE-BASED PIN LOGIN SCREEN (OWNER & STAFF)                    -->
+  <!-- CLEAN PREMIUM HEADER BANNER (EXTRA-LARGE TITLE, CRISP CSC ID)         -->
   <!-- ===================================================================== -->
-  <div id="loginOverlay" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden my-auto">
-      <!-- Top Brand Header -->
-      <div class="dynamic-header text-white px-6 py-6 text-center">
-        <div class="w-14 h-14 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center mx-auto mb-3 shadow-inner">
-          <i class="fa-solid fa-building-columns text-2xl text-amber-300"></i>
-        </div>
-        <h1 class="text-xl font-black tracking-tight uppercase">JAGAT JAN SEVA KENDRA</h1>
-        <p class="text-xs font-bold tracking-widest uppercase text-blue-200 mt-1">
-          DAILY CASH &amp; TRANSACTION LEDGER LOGIN
-        </p>
-      </div>
-
-      <!-- Login Form -->
-      <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="p-6 space-y-5">
-        <!-- Status Pill -->
-        <div class="flex items-center justify-center">
-          <span id="loginCloudStatus" class="inline-flex items-center gap-2 text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 sync-dot"></span>
-            <span>Ledger Storage Ready</span>
-          </span>
-        </div>
-
-        <!-- Role Selection -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
-            1. Select Operator Role
-          </label>
-          <div class="grid grid-cols-2 gap-3">
-            <button type="button" id="loginRoleOwnerBtn" onclick="selectLoginRole('Owner')"
-              class="py-3 px-4 rounded-2xl border-2 border-navy-800 bg-blue-50/70 text-navy-900 font-extrabold text-sm flex flex-col items-center gap-1 transition">
-              <i class="fa-solid fa-user-tie text-lg text-navy-800"></i>
-              <span>Owner</span>
-              <span class="text-[10px] font-semibold text-slate-500">Full Access</span>
-            </button>
-
-            <button type="button" id="loginRoleStaffBtn" onclick="selectLoginRole('Staff')"
-              class="py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-300 font-extrabold text-sm flex flex-col items-center gap-1 transition">
-              <i class="fa-solid fa-user-check text-lg text-slate-500"></i>
-              <span>Staff</span>
-              <span class="text-[10px] font-semibold text-slate-400">Entry &amp; View Only</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Center ID -->
-        <div>
-          <label for="loginCenterId" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
-            2. Center Workspace ID
-          </label>
-          <div class="relative">
-            <i class="fa-solid fa-server absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-            <input type="text" id="loginCenterId" value="JJSK-MAIN-01" required
-              oninput="onLoginCenterIdInput(this.value)"
-              class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 font-mono font-bold uppercase text-sm text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
-          </div>
-          <p class="text-[11px] text-slate-400 mt-1">Center ID: JJSK-MAIN-01</p>
-        </div>
-
-        <!-- 4-Digit PIN -->
-        <div>
-          <label for="loginPinInput" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
-            3. Enter 4-Digit Security PIN
-          </label>
-          <input type="password" id="loginPinInput" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required placeholder="••••"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
-            class="w-full text-center tracking-[0.75em] text-2xl font-black rounded-xl border border-slate-300 py-3 text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
-          <div id="loginPinHint" class="text-[11px] text-slate-500 text-center mt-1.5 font-medium">
-            Default Owner PIN: <strong class="text-slate-800">1234</strong> &nbsp;|&nbsp; Default Staff PIN: <strong class="text-slate-800">0000</strong>
-          </div>
-          <p id="loginErrorMsg" class="hidden text-xs font-bold text-rose-600 text-center mt-2 bg-rose-50 py-1.5 px-3 rounded-lg border border-rose-200"></p>
-        </div>
-
-        <button type="submit"
-          class="w-full py-3.5 px-5 rounded-2xl bg-navy-800 hover:bg-navy-900 active:scale-[0.99] text-white font-extrabold text-sm tracking-wide shadow-lg transition flex items-center justify-center gap-2">
-          <i class="fa-solid fa-right-to-bracket"></i>
-          <span>UNLOCK LIVE LEDGER</span>
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ===================================================================== -->
-  <!-- TOP DYNAMIC HEADER BANNER                                             -->
-  <!-- ===================================================================== -->
-  <header class="dynamic-header text-white shadow-lg sticky top-0 z-30 border-b border-blue-700/40">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 sm:py-4">
+  <header class="premium-header text-white shadow-2xl sticky top-0 z-30 border-b-2 border-amber-400/75">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3.5 sm:py-4">
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
-        <!-- Brand & Status -->
-        <div class="flex items-start sm:items-center justify-between gap-2">
-          <div class="flex items-center gap-3">
-            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shrink-0 shadow-inner">
-              <i class="fa-solid fa-building-columns text-xl sm:text-2xl text-amber-300"></i>
-            </div>
-            <div>
-              <h1 class="text-base sm:text-xl md:text-2xl font-black tracking-tight uppercase leading-tight text-white">
-                JAGAT JAN SEVA KENDRA
-              </h1>
-              <p class="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-blue-200 mt-0.5">
-                DAILY CASH &amp; TRANSACTION LEDGER
-              </p>
+        <!-- Left: Logo + Extra Large Bold Gradient JAGAT JANSEVA KENDRA + Clear Subtitle -->
+        <div class="flex items-center gap-4 sm:gap-5 flex-1 min-w-0">
+          <div id="brandLogoWrapper" onclick="openSettingsModal()" title="Click to upload or change your logo"
+            class="cursor-pointer group relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-amber-300 via-orange-500 to-rose-600 p-0.5 shrink-0 shadow-xl transition-transform duration-300 group-hover:scale-105">
+            <div class="w-full h-full rounded-[14px] bg-gradient-to-br from-blue-950 via-indigo-950 to-slate-950 flex items-center justify-center overflow-hidden">
+              <img id="customLogoImg" alt="JAGAT JANSEVA KENDRA Logo" class="hidden w-full h-full object-contain p-1" />
+              <svg id="defaultVectorLogo" viewBox="0 0 120 120" class="w-14 h-14 sm:w-16 sm:h-16">
+                <defs>
+                  <linearGradient id="goldShield" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fde047" />
+                    <stop offset="50%" stop-color="#f59e0b" />
+                    <stop offset="100%" stop-color="#ea580c" />
+                  </linearGradient>
+                  <linearGradient id="innerSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#1d4ed8" />
+                    <stop offset="100%" stop-color="#0f172a" />
+                  </linearGradient>
+                </defs>
+                <path d="M60 8 L104 24 V58 C104 86 84 104 60 113 C36 104 16 86 16 58 V24 Z" fill="url(#innerSky)" stroke="url(#goldShield)" stroke-width="5" />
+                <path d="M24 38 H96 V45 H24 Z" fill="#f97316" />
+                <path d="M24 45 H96 V51 H24 Z" fill="#ffffff" />
+                <path d="M24 51 H96 V58 H24 Z" fill="#16a34a" />
+                <circle cx="60" cy="48" r="2.6" fill="#1e3a8a" />
+                <text x="60" y="88" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-weight="900" font-size="33" fill="url(#goldShield)" letter-spacing="-1">JJ</text>
+                <text x="60" y="29" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="11" fill="#fde047" letter-spacing="2">CSC</text>
+              </svg>
             </div>
           </div>
 
-          <!-- Mobile Sync Badge -->
-          <div class="lg:hidden flex items-center gap-1.5 bg-slate-900/60 border border-emerald-400/30 px-2.5 py-1.5 rounded-full text-xs font-semibold text-emerald-300 shrink-0">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 sync-dot"></span>
-            <span id="syncTextMobile">Auto-Saved</span>
+          <div class="min-w-0 flex-1">
+            <h1 class="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[44px] font-black tracking-wide uppercase leading-none brand-title-gradient">
+              JAGAT JANSEVA KENDRA
+            </h1>
+            <p class="text-xs sm:text-sm font-extrabold tracking-wider text-amber-300 mt-1.5">
+              जन सेवा, हमारा संकल्प &bull; <span class="text-white font-bold">Digital Seva &amp; Banking Point</span>
+            </p>
+            <p class="text-xs sm:text-sm text-sky-100 font-semibold mt-0.5 flex items-center gap-1.5">
+              <i class="fa-solid fa-location-dot text-rose-400 shrink-0"></i>
+              <span>Village &amp; Post Mangupura, Tehsil Bilari, Dist. Moradabad, UP - 244411</span>
+            </p>
           </div>
         </div>
 
-        <!-- Right Controls -->
-        <div class="flex flex-wrap items-center justify-between sm:justify-end gap-2">
-          <!-- Live Date & Ticking Seconds Clock -->
-          <div class="flex items-center gap-2 bg-slate-950/50 border border-white/15 px-3 py-1.5 rounded-xl">
-            <div class="flex items-center gap-1.5 text-amber-300 font-bold text-xs sm:text-sm">
+        <!-- Right Side: Small Corner Date/Time + Crystal Clear CSC ID + Settings -->
+        <div class="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-end justify-between gap-2.5 shrink-0">
+          <!-- Top Corner: Small Compact Date & Time + Live Sync -->
+          <div class="flex items-center gap-2 text-[11px] font-bold bg-white/10 border border-white/15 px-3 py-1 rounded-full">
+            <span class="text-amber-300 flex items-center gap-1">
               <i class="fa-regular fa-calendar"></i>
               <span id="liveDateDisplay">--/--/----</span>
-            </div>
+            </span>
             <span class="text-white/30">|</span>
-            <div class="flex items-center gap-1.5 text-emerald-300 font-mono font-bold text-xs sm:text-sm">
+            <span class="text-cyan-200 font-mono flex items-center gap-1">
               <i class="fa-regular fa-clock"></i>
               <span id="liveTimeDisplay">--:--:-- --</span>
-            </div>
-          </div>
-
-          <!-- Active Logged-in Role Badge + Switch User -->
-          <div class="flex items-center gap-1.5 bg-white/10 border border-white/20 px-2.5 py-1.5 rounded-xl text-xs font-bold">
-            <span id="activeRoleBadge" class="px-2 py-0.5 rounded-lg bg-amber-400 text-slate-950 font-black uppercase">
-              Owner
             </span>
-            <button type="button" onclick="openSwitchUserModal()" class="text-blue-100 hover:text-white underline decoration-blue-300/60 ml-1">
-              Switch User
-            </button>
+            <span class="text-white/30">|</span>
+            <span class="text-emerald-300 flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 sync-dot"></span>
+              <span id="syncTextDesktop">Live</span>
+            </span>
           </div>
 
-          <!-- Owner-Only PIN Settings Button -->
-          <button type="button" id="pinSettingsBtn" onclick="openPinSettingsModal()" title="Change Owner & Staff PINs"
-            class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-amber-300 text-xs font-bold transition flex items-center gap-1">
-            <i class="fa-solid fa-key"></i>
-            <span class="hidden sm:inline">PINs</span>
-          </button>
+          <!-- Bottom Row on Right: Crystal Clear White CSC ID Badge + Settings -->
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" onclick="copyCscId()" title="Click to copy CSC ID"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-slate-900 border-2 border-amber-400 shadow-lg hover:bg-amber-50 transition">
+              <span class="w-5 h-5 rounded-md bg-blue-700 text-white flex items-center justify-center text-xs">
+                <i class="fa-solid fa-id-badge"></i>
+              </span>
+              <span class="text-xs font-extrabold uppercase tracking-wider text-blue-800">CSC ID:</span>
+              <span class="font-mono font-black text-sm sm:text-base text-slate-950 tracking-wide">776350030014</span>
+            </button>
 
-          <!-- Phone & PC Guide Button -->
-          <button type="button" onclick="openSetupGuideModal()"
-            class="px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition flex items-center gap-1.5">
-            <i class="fa-solid fa-mobile-screen-button text-emerald-300"></i>
-            <span>Phone &amp; PC Guide</span>
-          </button>
-
-          <!-- Direct Clean HTML Download Button -->
-          <button type="button" onclick="downloadCleanHtmlFile()"
-            class="px-2.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black shadow transition flex items-center gap-1.5">
-            <i class="fa-solid fa-file-arrow-down"></i>
-            <span>Download HTML</span>
-          </button>
-
-          <!-- Desktop Sync Badge -->
-          <div class="hidden lg:flex items-center gap-2 bg-slate-900/60 border border-emerald-400/30 px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-300">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 sync-dot"></span>
-            <span id="syncTextDesktop">Auto-Saved</span>
+            <button type="button" onclick="openSettingsModal()"
+              class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:brightness-110 text-slate-950 text-xs sm:text-sm font-black shadow transition flex items-center gap-1.5">
+              <i class="fa-solid fa-gear"></i>
+              <span>Settings</span>
+            </button>
           </div>
         </div>
       </div>
@@ -251,256 +239,233 @@
   <!-- ===================================================================== -->
   <!-- MAIN APPLICATION CONTAINER                                            -->
   <!-- ===================================================================== -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-5">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-5 sm:py-6 space-y-6">
 
-    <!-- WORKSPACE & STORAGE STATUS BAR -->
-    <section class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-3 sm:p-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
-      <div class="flex items-center gap-2.5 text-xs sm:text-sm text-slate-600">
-        <span class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
-          <i class="fa-solid fa-shield-halved"></i>
-        </span>
-        <div>
-          <span class="font-bold text-slate-900">Permanent Live Storage Active:</span>
-          <span>All entries, opening balance, villages &amp; archive history auto-save immediately. Use <strong>JSON Backup</strong> anytime to transfer across devices.</span>
-        </div>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2 self-end md:self-auto">
-        <span class="text-xs font-semibold text-slate-500 uppercase">Center ID:</span>
-        <span id="centerCodeBadge" class="font-mono font-bold text-xs bg-slate-100 text-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-200">
-          JJSK-MAIN-01
-        </span>
-        <button type="button" onclick="copyCenterCode()" class="text-xs font-bold text-blue-700 hover:text-blue-900 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition">
-          <i class="fa-solid fa-copy mr-1"></i>Copy ID
-        </button>
-      </div>
-    </section>
-
-    <!-- DASHBOARD KPI CARDS (7 KEY METRICS + OWNER ARCHIVE ACTION) -->
-    <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
-      <!-- KPI 1: Live Date -->
-      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-slate-200/90 flex flex-col justify-between">
-        <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Live Date</span>
-          <i class="fa-regular fa-calendar-check text-blue-600 text-xs"></i>
-        </div>
-        <div class="mt-2">
-          <div id="kpiLiveDate" class="text-base sm:text-lg font-extrabold text-slate-900">--/--/----</div>
-          <p class="text-[10px] text-slate-400 mt-0.5">DD-MM-YYYY</p>
-        </div>
-      </div>
-
-      <!-- KPI 2: Live Time -->
-      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-slate-200/90 flex flex-col justify-between">
-        <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Live Time</span>
-          <i class="fa-regular fa-clock text-emerald-600 text-xs"></i>
-        </div>
-        <div class="mt-2">
-          <div id="kpiLiveTime" class="text-base sm:text-lg font-mono font-extrabold text-slate-900">--:--:-- --</div>
-          <p class="text-[10px] text-slate-400 mt-0.5">Auto-Updating</p>
-        </div>
-      </div>
-
-      <!-- KPI 3: Opening Balance (Owner Editable) -->
-      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-slate-200/90 flex flex-col justify-between">
+    <!-- =================================================================== -->
+    <!-- 7 VIBRANT MULTI-COLOR KPI CARDS                                     -->
+    <!-- =================================================================== -->
+    <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3.5">
+      <!-- KPI 1: Opening Balance (Violet-Purple Gradient Card) -->
+      <div class="animate-card bg-gradient-to-br from-violet-600 via-purple-700 to-indigo-900 text-white rounded-2xl p-3.5 shadow-md border border-purple-400/40 flex flex-col justify-between" style="animation-delay: 0.03s;">
         <div class="flex items-center justify-between gap-1">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Opening Balance</span>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-purple-100">Opening Bal</span>
           <button type="button" id="editOpeningBtn" onclick="openOpeningBalanceModal()"
-            class="text-[11px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-0.5 rounded-md">
+            class="text-[11px] font-bold text-slate-950 bg-amber-300 hover:bg-amber-200 px-2 py-0.5 rounded-md shadow-2xs transition">
             <i class="fa-solid fa-pen"></i> Edit
           </button>
         </div>
         <div class="mt-2">
-          <div id="kpiOpeningBalance" class="text-base sm:text-lg font-extrabold text-slate-900">₹0</div>
-          <p class="text-[10px] text-slate-400 mt-0.5">Morning Shop Cash</p>
+          <div id="kpiOpeningBalance" class="text-base sm:text-lg font-extrabold text-white">₹0</div>
+          <p class="text-[10px] text-purple-200 mt-0.5">Morning Shop Cash</p>
         </div>
       </div>
 
-      <!-- KPI 4: Total Deposits -->
-      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-emerald-200/80 flex flex-col justify-between">
+      <!-- KPI 2: Total Deposits (Emerald Green Gradient Card) -->
+      <div class="animate-card bg-gradient-to-br from-emerald-500 via-emerald-600 to-green-800 text-white rounded-2xl p-3.5 shadow-md border border-emerald-300/40 flex flex-col justify-between" style="animation-delay: 0.06s;">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Total Deposits</span>
-          <i class="fa-solid fa-arrow-down text-emerald-600 text-xs"></i>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-100">Deposits</span>
+          <span class="w-6 h-6 rounded-lg bg-white/20 text-white flex items-center justify-center text-xs">
+            <i class="fa-solid fa-arrow-down"></i>
+          </span>
         </div>
         <div class="mt-2">
-          <div id="kpiTotalDeposits" class="text-base sm:text-lg font-extrabold text-emerald-600">₹0</div>
-          <p class="text-[10px] text-slate-400 mt-0.5">Cash In / Bills</p>
+          <div id="kpiTotalDeposits" class="text-base sm:text-lg font-extrabold text-white">₹0</div>
+          <p class="text-[10px] text-emerald-100 mt-0.5">Cash In / Bills</p>
         </div>
       </div>
 
-      <!-- KPI 5: Total Withdrawals -->
-      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-rose-200/80 flex flex-col justify-between">
+      <!-- KPI 3: Total Withdrawals (Rose-Red Gradient Card) -->
+      <div class="animate-card bg-gradient-to-br from-rose-500 via-rose-600 to-red-800 text-white rounded-2xl p-3.5 shadow-md border border-rose-300/40 flex flex-col justify-between" style="animation-delay: 0.09s;">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-rose-700">Total Withdrawals</span>
-          <i class="fa-solid fa-arrow-up text-rose-600 text-xs"></i>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-rose-100">Withdrawals</span>
+          <span class="w-6 h-6 rounded-lg bg-white/20 text-white flex items-center justify-center text-xs">
+            <i class="fa-solid fa-arrow-up"></i>
+          </span>
         </div>
         <div class="mt-2">
-          <div id="kpiTotalWithdrawals" class="text-base sm:text-lg font-extrabold text-rose-600">₹0</div>
-          <p class="text-[10px] text-slate-400 mt-0.5">Cash Paid Out</p>
+          <div id="kpiTotalWithdrawals" class="text-base sm:text-lg font-extrabold text-white">₹0</div>
+          <p class="text-[10px] text-rose-100 mt-0.5">Cash Paid Out</p>
         </div>
       </div>
 
-      <!-- KPI 6: Current Shop Balance -->
-      <div class="bg-gradient-to-br from-navy-900 to-navy-800 text-white rounded-2xl p-3.5 shadow-md border border-blue-700 flex flex-col justify-between">
+      <!-- KPI 4: Electricity Bills Total (Cyan-Teal Gradient Card) -->
+      <div class="animate-card bg-gradient-to-br from-cyan-600 via-teal-600 to-emerald-800 text-white rounded-2xl p-3.5 shadow-md border border-cyan-300/40 flex flex-col justify-between" style="animation-delay: 0.12s;">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-blue-200">Current Shop Bal</span>
-          <i class="fa-solid fa-wallet text-amber-300 text-xs"></i>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-100">Electricity Bills</span>
+          <span class="w-6 h-6 rounded-lg bg-white/20 text-amber-300 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-bolt"></i>
+          </span>
         </div>
         <div class="mt-2">
-          <div id="kpiCurrentBalance" class="text-lg sm:text-xl font-black text-white">₹0</div>
-          <p class="text-[10px] text-blue-200 mt-0.5">Live Cash in Drawer</p>
+          <div id="kpiElectricityTotal" class="text-base sm:text-lg font-extrabold text-white">₹0</div>
+          <p id="kpiElectricityCount" class="text-[10px] text-cyan-100 mt-0.5">0 Bill(s) Paid</p>
         </div>
       </div>
 
-      <!-- KPI 7: Total Transactions + Owner ARCHIVE DAY Button -->
-      <div class="bg-white rounded-2xl p-3.5 shadow-sm border border-slate-200/90 flex flex-col justify-between col-span-2 sm:col-span-1">
+      <!-- KPI 5: Net Today Flow (Royal Blue Gradient Card) -->
+      <div class="animate-card bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white rounded-2xl p-3.5 shadow-md border border-blue-400/40 flex flex-col justify-between" style="animation-delay: 0.15s;">
         <div class="flex items-center justify-between">
-          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Transactions</span>
-          <span id="kpiTotalTransactions" class="text-sm font-black text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">0</span>
+          <span class="text-[11px] font-bold uppercase tracking-wider text-blue-100">Net Cash Flow</span>
+          <span class="w-6 h-6 rounded-lg bg-white/20 text-white flex items-center justify-center text-xs">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </span>
+        </div>
+        <div class="mt-2">
+          <div id="kpiNetFlow" class="text-base sm:text-lg font-extrabold text-white">₹0</div>
+          <p class="text-[10px] text-blue-200 mt-0.5">Deposits - Withdrawals</p>
+        </div>
+      </div>
+
+      <!-- KPI 6: Current Shop Balance (Deep Navy & Gold Shine Card) -->
+      <div class="animate-card shine-card bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-900 text-white rounded-2xl p-3.5 shadow-lg border-2 border-amber-400/70 flex flex-col justify-between" style="animation-delay: 0.18s;">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-amber-300">Shop Balance</span>
+          <span class="w-6 h-6 rounded-lg bg-amber-400/20 text-amber-300 flex items-center justify-center text-xs">
+            <i class="fa-solid fa-wallet"></i>
+          </span>
+        </div>
+        <div class="mt-2">
+          <div id="kpiCurrentBalance" class="text-lg sm:text-xl font-black text-amber-300 tracking-tight">₹0</div>
+          <p class="text-[10px] text-sky-200 mt-0.5">Live Cash in Drawer</p>
+        </div>
+      </div>
+
+      <!-- KPI 7: Total Transactions + ARCHIVE DAY (Amber-Orange Gradient Card) -->
+      <div class="animate-card bg-gradient-to-br from-amber-500 via-orange-600 to-red-700 text-white rounded-2xl p-3.5 shadow-md border border-amber-300/50 flex flex-col justify-between col-span-2 sm:col-span-1" style="animation-delay: 0.21s;">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold uppercase tracking-wider text-amber-100">Entries</span>
+          <span id="kpiTotalTransactions" class="text-xs font-black text-slate-950 bg-white px-2.5 py-0.5 rounded-md shadow-2xs">0</span>
         </div>
         <button type="button" id="archiveDayBtn" onclick="confirmArchiveDay()"
-          class="mt-2 w-full py-2 px-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-[0.98] text-slate-950 font-black text-xs tracking-wide shadow transition flex items-center justify-center gap-1">
+          class="mt-2 w-full py-2 px-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 active:scale-[0.98] text-amber-300 font-black text-xs tracking-wide shadow-md transition flex items-center justify-center gap-1">
           <span>ARCHIVE DAY</span>
           <i class="fa-solid fa-angles-right"></i>
         </button>
-        <p id="staffArchiveLockedNote" class="hidden text-[10px] text-slate-400 mt-1 text-center font-medium">
-          <i class="fa-solid fa-lock mr-0.5"></i>Owner Only Action
-        </p>
       </div>
     </section>
 
-    <!-- NAVIGATION TABS & BACKUP / EXPORT TOOLBAR -->
-    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
-      <!-- Tabs -->
+    <!-- NAVIGATION TABS & QUICK FILTER PILLS -->
+    <div class="flex flex-wrap items-center justify-between gap-3 bg-white/85 backdrop-blur-xs p-2.5 rounded-2xl border border-slate-200/90 shadow-xs">
       <div class="flex items-center gap-2">
         <button type="button" id="tabTodayBtn" onclick="switchTab('today')"
-          class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-navy-800 text-white shadow-sm transition flex items-center gap-2">
+          class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-sm transition flex items-center gap-2">
           <i class="fa-solid fa-list-check"></i>
-          <span>Today's Live Ledger</span>
-          <span id="tabTodayCount" class="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full">0</span>
+          <span>Transaction History</span>
+          <span id="tabTodayCount" class="bg-white/25 text-white text-xs px-2 py-0.5 rounded-full">0</span>
         </button>
 
         <button type="button" id="tabArchiveBtn" onclick="switchTab('archive')"
-          class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 transition flex items-center gap-2">
-          <i class="fa-solid fa-clock-rotate-left text-blue-700"></i>
+          class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-2">
+          <i class="fa-solid fa-clock-rotate-left text-indigo-700"></i>
           <span>Archive History</span>
-          <span id="tabArchiveCount" class="bg-slate-100 text-slate-700 text-xs px-2 py-0.5 rounded-full">0</span>
+          <span id="tabArchiveCount" class="bg-white text-slate-700 text-xs px-2 py-0.5 rounded-full border border-slate-200">0</span>
         </button>
       </div>
 
-      <!-- Safety Export & JSON Backup / Restore Controls -->
-      <div class="flex flex-wrap items-center gap-2">
-        <button type="button" onclick="exportCurrentCSV()"
-          class="px-3 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition flex items-center gap-1.5">
-          <i class="fa-solid fa-file-excel"></i>
-          <span>Excel (CSV)</span>
-        </button>
-
-        <button type="button" onclick="downloadJsonBackup()"
-          class="px-3 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white shadow-sm transition flex items-center gap-1.5">
-          <i class="fa-solid fa-download"></i>
-          <span>JSON Backup</span>
-        </button>
-
-        <label id="jsonRestoreLabel" class="cursor-pointer px-3 py-2 rounded-xl text-xs font-bold bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs transition flex items-center gap-1.5">
-          <i class="fa-solid fa-upload text-blue-600"></i>
-          <span>Restore JSON</span>
-          <input type="file" id="jsonRestoreInput" accept=".json" onchange="handleJsonRestore(event)" class="hidden" />
-        </label>
+      <!-- Quick Filter Pills -->
+      <div id="quickFilterBar" class="flex flex-wrap items-center gap-1.5 text-xs font-bold">
+        <button type="button" onclick="setTypeFilter('ALL')" id="filterAllBtn"
+          class="px-3.5 py-1.5 rounded-xl bg-slate-900 text-white shadow-xs transition">All</button>
+        <button type="button" onclick="setTypeFilter('DEPOSIT')" id="filterDepBtn"
+          class="px-3.5 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition">Deposits</button>
+        <button type="button" onclick="setTypeFilter('WITHDRAWAL')" id="filterWithBtn"
+          class="px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition">Withdrawals</button>
       </div>
     </div>
 
     <!-- ===================================================================== -->
-    <!-- VIEW 1: TODAY'S LIVE LEDGER (QUICK ENTRY FORM + REAL-TIME TABLE)      -->
+    <!-- VIEW 1: TODAY'S LIVE LEDGER                                           -->
     <!-- ===================================================================== -->
-    <div id="todayView" class="space-y-5">
+    <div id="todayView" class="space-y-6">
 
-      <!-- STREAMLINED QUICK-ENTRY FORM -->
-      <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="bg-slate-50 border-b border-slate-200 px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-navy-800 text-white flex items-center justify-center text-xs">
-              <i class="fa-solid fa-plus"></i>
+      <!-- COLORFUL NEW CUSTOMER ENTRY CARD -->
+      <section class="animate-card bg-white rounded-2xl shadow-md border border-blue-200/80 overflow-hidden" style="animation-delay: 0.1s;">
+        <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center text-sm font-black shadow">
+              <i class="fa-solid fa-user-plus"></i>
             </span>
-            <h2 id="formHeading" class="font-extrabold text-slate-900 text-sm sm:text-base">
+            <h2 id="formHeading" class="font-display font-extrabold text-white text-sm sm:text-base tracking-wide">
               New Customer Entry
             </h2>
           </div>
-          <span class="text-xs font-semibold text-slate-500">
-            <i class="fa-solid fa-bolt text-amber-500 mr-1"></i>Date (DD-MM-YYYY) &amp; Time Auto-Stamped on Save
+          <span class="text-xs font-bold bg-white/15 px-3 py-1 rounded-full text-amber-200">
+            <i class="fa-solid fa-bolt text-amber-300 mr-1"></i>Auto Date &amp; Time
           </span>
         </div>
 
-        <form id="transactionForm" onsubmit="handleTransactionSubmit(event)" class="p-4 sm:p-6 space-y-4">
+        <form id="transactionForm" onsubmit="handleTransactionSubmit(event)" class="p-4 sm:p-6 space-y-4 bg-gradient-to-b from-blue-50/30 to-white">
           <input type="hidden" id="editEntryId" value="" />
 
           <!-- Row 1: Customer Name, Village, Mobile Number, Aadhaar Number -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- Customer Name -->
             <div>
-              <label for="customerName" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              <label for="customerName" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950 mb-1.5">
                 Customer Name <span class="text-rose-600">*</span>
               </label>
               <input type="text" id="customerName" required placeholder="e.g. Rameshwar Singh"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
             </div>
 
-            <!-- Village (Custom List + Manage Villages Modal) -->
+            <!-- Village -->
             <div>
-              <div class="flex items-center justify-between mb-1">
-                <label for="villageName" class="block text-xs font-bold uppercase tracking-wide text-slate-700">
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="villageName" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950">
                   Village <span class="text-rose-600">*</span>
                 </label>
                 <button type="button" id="manageVillagesBtn" onclick="openManageVillagesModal()"
-                  class="text-[11px] font-bold bg-blue-50 hover:bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md border border-blue-200 transition">
-                  <i class="fa-solid fa-pen-to-square mr-0.5"></i>Manage Villages
+                  class="text-[11px] font-bold bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-md transition">
+                  <i class="fa-solid fa-pen-to-square mr-0.5"></i>Edit List
                 </button>
               </div>
               <input type="text" id="villageName" list="villageOptions" required placeholder="Select or type village"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
               <datalist id="villageOptions">
                 <option value="Mangupura"></option>
                 <option value="Jhakda"></option>
+                <option value="Gurgaon"></option>
+                <option value="Kasampur"></option>
+                <option value="Aehladpur Karar"></option>
               </datalist>
             </div>
 
             <!-- Mobile Number -->
             <div>
-              <label for="mobileNumber" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              <label for="mobileNumber" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950 mb-1.5">
                 Mobile Number
               </label>
               <input type="tel" id="mobileNumber" inputmode="numeric" maxlength="10" placeholder="10-digit mobile"
                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
             </div>
 
             <!-- Aadhaar Number -->
             <div>
-              <label for="aadhaarNumber" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              <label for="aadhaarNumber" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950 mb-1.5">
                 Aadhaar Number (Optional)
               </label>
               <input type="text" id="aadhaarNumber" inputmode="numeric" maxlength="14" placeholder="XXXX-XXXX-1234"
                 oninput="formatAadhaarInput(this)"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-mono font-medium text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-mono font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
             </div>
           </div>
 
-          <!-- Row 2: Transaction Type (+ Single Electricity Bill Pill), Payment Method, Amount, Customer A/c Balance -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 items-start">
+          <!-- Row 2: Transaction Type, Payment Method, Amount, Customer Account Balance -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-start">
             <!-- Transaction Type -->
             <div>
-              <div class="flex items-center justify-between mb-1">
-                <label for="txType" class="block text-xs font-bold uppercase tracking-wide text-slate-700">
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="txType" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950">
                   Transaction Type <span class="text-rose-600">*</span>
                 </label>
                 <button type="button" onclick="quickSelectElectricityBill()"
-                  class="text-[11px] font-bold bg-amber-100 hover:bg-amber-200 text-amber-900 px-2 py-0.5 rounded-md border border-amber-300 transition">
-                  <i class="fa-solid fa-bolt text-amber-600 mr-0.5"></i>Electricity Bill
+                  class="text-[11px] font-bold bg-amber-400 hover:bg-amber-300 text-slate-950 px-2 py-0.5 rounded-md shadow-2xs transition">
+                  <i class="fa-solid fa-bolt mr-0.5"></i>Electricity Bill
                 </button>
               </div>
               <select id="txType"
-                class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition">
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition">
                 <option value="Withdrawal">Withdrawal</option>
                 <option value="Deposit">Deposit</option>
                 <option value="Electricity Bill">Electricity Bill</option>
@@ -510,52 +475,65 @@
 
             <!-- Payment Method -->
             <div>
-              <label for="paymentMethod" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
-                Payment Method <span class="text-rose-600">*</span>
-              </label>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="paymentMethod" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950">
+                  Payment Method <span class="text-rose-600">*</span>
+                </label>
+                <button type="button" id="manageMethodsBtn" onclick="openManageMethodsModal()"
+                  class="text-[11px] font-bold bg-indigo-100 hover:bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-md transition">
+                  <i class="fa-solid fa-pen-to-square mr-0.5"></i>Edit List
+                </button>
+              </div>
               <select id="paymentMethod"
-                class="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition">
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition">
                 <option value="DigiPay">DigiPay</option>
-                <option value="Cash">Cash</option>
+                <option value="PhonePe">PhonePe</option>
+                <option value="Google Pay">Google Pay</option>
+                <option value="Paytm">Paytm</option>
                 <option value="UPI">UPI</option>
-                <option value="AEPS">AEPS</option>
-                <option value="Portal Wallet">Portal Wallet</option>
+                <option value="QR Code">QR Code</option>
+                <option value="Navipay">Navipay</option>
+                <option value="Cash">Cash</option>
+                <option value="CSC">CSC</option>
+                <option value="Group Loan">Group Loan</option>
+                <option value="EMI">EMI</option>
+                <option value="Bill">Bill</option>
               </select>
             </div>
 
             <!-- Amount (₹) -->
             <div>
-              <label for="txAmount" class="block text-xs font-bold uppercase tracking-wide text-navy-900 mb-1">
+              <label for="txAmount" class="block text-xs font-extrabold uppercase tracking-wide text-emerald-800 mb-1.5">
                 Amount (₹) <span class="text-rose-600">*</span>
               </label>
               <input type="number" id="txAmount" inputmode="decimal" min="1" step="any" required placeholder="Enter amount"
-                class="w-full rounded-xl border border-blue-300 bg-blue-50/40 px-3.5 py-2.5 text-sm font-extrabold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border-2 border-emerald-400 bg-emerald-50/40 px-3.5 py-2.5 text-sm font-black text-slate-900 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 outline-none transition" />
             </div>
 
             <!-- Customer Account Balance -->
             <div>
-              <label for="customerBalance" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              <label for="customerBalance" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950 mb-1.5">
                 Customer Account Balance (₹)
               </label>
               <input type="number" id="customerBalance" inputmode="decimal" step="any" placeholder="Optional balance"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
             </div>
           </div>
 
-          <!-- Row 3: Remarks & Save Button -->
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-end">
+          <!-- Row 3: Remarks & Colorful Save Button -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end">
             <div class="lg:col-span-8">
-              <label for="remarksInput" class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">
+              <label for="remarksInput" class="block text-xs font-extrabold uppercase tracking-wide text-indigo-950 mb-1.5">
                 Remarks (Optional)
               </label>
               <input type="text" id="remarksInput" placeholder="e.g. Consumer ID / Bill / Reference Note"
-                class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
+                class="w-full rounded-xl border border-indigo-200 bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none transition" />
             </div>
 
             <div class="lg:col-span-4 flex items-center gap-2">
               <button type="submit" id="submitTxBtn"
-                class="flex-1 py-2.5 px-5 rounded-xl bg-navy-800 hover:bg-navy-900 active:scale-[0.99] text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
-                <i class="fa-solid fa-check-circle"></i>
+                class="flex-1 py-2.5 px-5 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-600 to-blue-700 hover:brightness-110 active:scale-[0.99] text-white font-black text-sm shadow-lg transition flex items-center justify-center gap-2">
+                <i class="fa-solid fa-circle-check text-amber-300"></i>
                 <span id="submitTxBtnText">Save Entry</span>
               </button>
               <button type="button" id="cancelEditBtn" onclick="resetTransactionForm()"
@@ -567,19 +545,22 @@
         </form>
       </section>
 
-      <!-- TODAY'S LIVE LEDGER TABLE & MOBILE CARDS -->
-      <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-        <!-- Search Bar -->
-        <div class="p-4 sm:px-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h3 class="font-extrabold text-slate-900 text-sm sm:text-base">Today's Live Ledger</h3>
-            <p class="text-xs text-slate-500">Automatic Shop Remaining Balance calculation with Aadhaar, Village &amp; WhatsApp Receipt</p>
+      <!-- =================================================================== -->
+      <!-- CLEAN & SHORT "TRANSACTION HISTORY" SECTION                         -->
+      <!-- =================================================================== -->
+      <section class="animate-card bg-white rounded-2xl shadow-md border border-indigo-200/80 overflow-hidden" style="animation-delay: 0.16s;">
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white px-4 sm:px-6 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center text-sm font-black shadow">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </span>
+            <h3 class="font-display font-extrabold text-white text-base sm:text-lg tracking-wide">Transaction History</h3>
           </div>
 
           <div class="relative w-full sm:w-72">
-            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-            <input type="text" id="todaySearchInput" oninput="renderTodayLedger()" placeholder="Search name, village, mobile..."
-              class="w-full pl-9 pr-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-300 text-xs"></i>
+            <input type="text" id="todaySearchInput" oninput="renderTodayLedger()" placeholder="Search name, village, Aadhaar..."
+              class="w-full pl-9 pr-3.5 py-2 rounded-xl bg-white/10 border border-white/25 text-white placeholder-blue-200 text-xs sm:text-sm focus:bg-white/20 focus:border-amber-400 outline-none" />
           </div>
         </div>
 
@@ -587,20 +568,17 @@
         <div class="hidden md:block overflow-x-auto">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-navy-900 text-white text-[11px] font-bold uppercase tracking-wider">
+              <tr class="bg-gradient-to-r from-blue-800 via-indigo-800 to-purple-900 text-white text-[11px] font-bold uppercase tracking-wider">
                 <th class="py-3 px-3">#</th>
-                <th class="py-3 px-3">Date (DD-MM-YYYY)</th>
-                <th class="py-3 px-3">Time</th>
-                <th class="py-3 px-3">Customer Name</th>
+                <th class="py-3 px-3">Date &amp; Time</th>
+                <th class="py-3 px-3">Customer Details</th>
                 <th class="py-3 px-3">Village</th>
-                <th class="py-3 px-3">Mobile</th>
-                <th class="py-3 px-3">Aadhaar Number</th>
+                <th class="py-3 px-3">Aadhaar No.</th>
                 <th class="py-3 px-3">Type</th>
                 <th class="py-3 px-3">Mode</th>
                 <th class="py-3 px-3 text-right">Deposit (₹)</th>
                 <th class="py-3 px-3 text-right">Withdrawal (₹)</th>
-                <th class="py-3 px-3 text-right bg-blue-950">Shop Remaining Bal (₹)</th>
-                <th class="py-3 px-3">By</th>
+                <th class="py-3 px-3 text-right bg-amber-500/20 text-amber-200">Shop Balance (₹)</th>
                 <th class="py-3 px-3">Remarks</th>
                 <th class="py-3 px-3 text-center">Actions</th>
               </tr>
@@ -609,18 +587,15 @@
           </table>
         </div>
 
-        <!-- Mobile Cards View -->
-        <div id="todayMobileCards" class="md:hidden divide-y divide-slate-200"></div>
+        <!-- Mobile Colorful Accent Cards View -->
+        <div id="todayMobileCards" class="md:hidden p-3 space-y-3 bg-slate-50/70"></div>
 
         <!-- Empty State -->
-        <div id="todayEmptyState" class="hidden py-12 px-4 text-center">
-          <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-2xl">
+        <div id="todayEmptyState" class="hidden py-12 px-4 text-center bg-gradient-to-b from-white to-blue-50/40">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center mx-auto mb-2.5 text-xl shadow-lg">
             <i class="fa-solid fa-receipt"></i>
           </div>
-          <h4 class="font-bold text-slate-800 text-base">No Transactions Recorded Today</h4>
-          <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-1">
-            Add your first entry above. Date, time, and Shop Remaining Balance will update automatically.
-          </p>
+          <h4 class="font-extrabold text-slate-900 text-base">No Transactions Yet</h4>
         </div>
       </section>
     </div>
@@ -629,51 +604,167 @@
     <!-- VIEW 2: ARCHIVE HISTORY (DAY-BY-DAY RECORDS)                          -->
     <!-- ===================================================================== -->
     <div id="archiveView" class="hidden space-y-5">
-      <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
-          <div>
-            <h2 class="text-base sm:text-lg font-extrabold text-slate-900">Archive History</h2>
-            <p class="text-xs sm:text-sm text-slate-500">
-              All past day ledgers saved permanently with date-wise summary headlines
-            </p>
+      <section class="bg-white rounded-2xl shadow-md border border-indigo-200/80 overflow-hidden">
+        <div class="bg-gradient-to-r from-indigo-900 via-purple-900 to-blue-900 text-white px-4 sm:px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center text-sm font-black shadow">
+              <i class="fa-solid fa-box-archive"></i>
+            </span>
+            <h2 class="font-display text-base sm:text-lg font-extrabold text-white">Archive History</h2>
           </div>
 
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
             <div class="relative">
-              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-              <input type="text" id="archiveSearchInput" oninput="renderArchiveHistory()" placeholder="Search date (DD-MM-YYYY) or name..."
-                class="w-full sm:w-72 pl-9 pr-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-indigo-300 text-xs"></i>
+              <input type="text" id="archiveSearchInput" oninput="renderArchiveHistory()" placeholder="Search date, customer, village..."
+                class="w-full sm:w-72 pl-9 pr-3.5 py-2 rounded-xl bg-white/10 border border-white/25 text-white placeholder-indigo-200 text-xs sm:text-sm focus:bg-white/20 focus:border-amber-400 outline-none" />
             </div>
             <button type="button" onclick="exportAllArchivesCSV()"
-              class="px-4 py-2 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+              class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm shadow transition flex items-center justify-center gap-1.5">
               <i class="fa-solid fa-download"></i>
-              <span>Export Full Archive CSV</span>
+              <span>Export CSV</span>
             </button>
           </div>
         </div>
 
-        <div id="archiveListContainer" class="mt-5 space-y-6"></div>
+        <div id="archiveListContainer" class="p-4 sm:p-6 space-y-6 bg-slate-50/60"></div>
 
         <div id="archiveEmptyState" class="hidden py-12 text-center">
-          <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-2xl">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-500 flex items-center justify-center mx-auto mb-2.5 text-xl">
             <i class="fa-solid fa-box-open"></i>
           </div>
-          <h4 class="font-bold text-slate-800 text-base">No Archived Days Yet</h4>
-          <p class="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-1">
-            When the Owner clicks <strong>ARCHIVE DAY &gt;&gt;</strong> at closing time, today's full report is saved here permanently.
-          </p>
+          <h4 class="font-extrabold text-slate-800 text-base">No Archived Days Yet</h4>
         </div>
       </section>
     </div>
   </main>
 
   <!-- ===================================================================== -->
-  <!-- MODALS (ALL CLOSED BY DEFAULT)                                        -->
+  <!-- COLORFUL PREMIUM FOOTER                                               -->
+  <!-- ===================================================================== -->
+  <footer class="bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-950 text-slate-300 border-t-2 border-amber-400/60 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+      <div class="font-extrabold text-white flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+        <span>JAGAT JANSEVA KENDRA &bull; CSC ID: <span class="font-mono text-amber-300">776350030014</span></span>
+      </div>
+      <div class="text-center sm:text-right text-blue-200">
+        Village and Post Mangupura, Tehsil Bilari, District Moradabad, Uttar Pradesh 244411
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODALS                                                                -->
   <!-- ===================================================================== -->
 
-  <!-- 1. Edit Opening Balance Modal (Owner Only) -->
+  <!-- 1. Settings, Logo Customization & Backup Modal -->
+  <div id="settingsModal" class="fixed inset-0 z-50 hidden bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-indigo-200 space-y-5 my-auto">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="font-display font-extrabold text-slate-900 text-lg flex items-center gap-2">
+          <i class="fa-solid fa-gear text-blue-700"></i>
+          <span>Center Settings &amp; Data Backup</span>
+        </h3>
+        <button type="button" onclick="closeModal('settingsModal')" class="text-slate-400 hover:text-slate-700 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Custom Logo Upload Section -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-200 space-y-2.5">
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <h4 class="font-extrabold text-navy-900 text-sm">Center Logo</h4>
+            <p class="text-xs text-slate-600">Upload your PNG/JPG logo or use the Royal CSC Emblem</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <label class="cursor-pointer px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold transition shadow-xs">
+              <i class="fa-solid fa-image mr-1"></i>Upload Logo
+              <input type="file" accept="image/*" onchange="handleLogoUpload(event)" class="hidden" />
+            </label>
+            <button type="button" onclick="resetCenterLogo()" class="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 text-xs font-bold">
+              Default
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Excel Export & JSON Backup / Restore -->
+      <div class="space-y-2.5">
+        <h4 class="font-extrabold text-slate-900 text-sm">Reports &amp; Backup Files</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <button type="button" onclick="exportCurrentCSV()"
+            class="px-3 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-file-excel"></i>
+            <span>Export Excel CSV</span>
+          </button>
+
+          <button type="button" onclick="downloadJsonBackup()"
+            class="px-3 py-2.5 rounded-xl text-xs font-bold bg-indigo-700 hover:bg-indigo-800 text-white shadow-xs transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-download"></i>
+            <span>JSON Backup</span>
+          </button>
+
+          <label class="cursor-pointer px-3 py-2.5 rounded-xl text-xs font-bold bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 transition flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-upload"></i>
+            <span>Restore JSON</span>
+            <input type="file" id="jsonRestoreInput" accept=".json" onchange="handleJsonRestore(event)" class="hidden" />
+          </label>
+        </div>
+      </div>
+
+      <!-- Phone & Computer App Setup Guide -->
+      <div class="bg-amber-50/90 p-3.5 rounded-xl border border-amber-200 text-xs text-slate-700 space-y-1.5">
+        <h4 class="font-extrabold text-amber-950 flex items-center gap-1.5">
+          <i class="fa-solid fa-mobile-screen-button text-amber-600"></i>
+          <span>Install as App on Phone &amp; PC</span>
+        </h4>
+        <p>
+          Open your website link in <strong>Google Chrome</strong> on your phone or PC, tap <strong>3 Dots (⋮) &rarr; "Add to Home screen" / "Install app"</strong> to use it like a native app.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-end pt-1">
+        <button type="button" onclick="closeModal('settingsModal')" class="px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-bold text-sm">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Customer Printable Receipt Slip Modal -->
+  <div id="receiptModal" class="fixed inset-0 z-50 hidden bg-slate-950/65 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 shadow-2xl border border-slate-200 space-y-4 my-auto">
+      <div id="receiptPrintArea" class="border-2 border-dashed border-blue-400 rounded-xl p-4 space-y-3 bg-white text-slate-900">
+        <div class="text-center border-b border-slate-200 pb-2.5">
+          <h4 class="font-display font-black text-base uppercase tracking-tight text-navy-900">JAGAT JANSEVA KENDRA</h4>
+          <p class="text-[11px] font-bold text-blue-700">CSC ID: 776350030014</p>
+          <p class="text-[10px] text-slate-500 mt-0.5">Village &amp; Post Mangupura, Tehsil Bilari, Dist. Moradabad, UP 244411</p>
+        </div>
+
+        <div id="receiptBodyContent" class="text-xs space-y-1.5"></div>
+
+        <div class="border-t border-slate-200 pt-2 text-center text-[10px] text-slate-500 font-semibold">
+          जन सेवा, हमारा संकल्प &bull; Computer Generated Receipt
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2">
+        <button type="button" onclick="closeModal('receiptModal')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm">
+          Close
+        </button>
+        <button type="button" onclick="window.print()" class="px-4 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-print"></i>
+          <span>Print Receipt</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Edit Opening Balance Modal -->
   <div id="openingBalanceModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-purple-200 space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="font-extrabold text-slate-900 text-lg">Set Morning Opening Balance</h3>
         <button type="button" onclick="closeModal('openingBalanceModal')" class="text-slate-400 hover:text-slate-700 p-1">
@@ -686,105 +777,22 @@
       <div>
         <label for="openingBalanceInput" class="block text-xs font-bold uppercase text-slate-700 mb-1">Opening Balance (₹)</label>
         <input type="number" id="openingBalanceInput" inputmode="decimal" min="0" step="any" placeholder="e.g. 50000"
-          class="w-full rounded-xl border border-slate-300 px-4 py-3 text-lg font-extrabold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
+          class="w-full rounded-xl border-2 border-purple-300 px-4 py-3 text-lg font-extrabold text-slate-900 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 outline-none" />
       </div>
       <div class="flex items-center justify-end gap-2 pt-2">
         <button type="button" onclick="closeModal('openingBalanceModal')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm">
           Cancel
         </button>
-        <button type="button" onclick="saveOpeningBalance()" class="px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-bold text-sm shadow">
+        <button type="button" onclick="saveOpeningBalance()" class="px-5 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-bold text-sm shadow">
           Save Opening Balance
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 2. Change Owner & Staff PINs Modal (Owner Only) -->
-  <div id="pinSettingsModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-          <i class="fa-solid fa-key text-amber-500"></i>
-          <span>Manage Security PINs</span>
-        </h3>
-        <button type="button" onclick="closeModal('pinSettingsModal')" class="text-slate-400 hover:text-slate-700 p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-      <p class="text-xs sm:text-sm text-slate-600">
-        Update 4-digit login PINs for Owner and Staff.
-      </p>
-      <div class="grid grid-cols-2 gap-3">
-        <div>
-          <label for="newOwnerPinInput" class="block text-xs font-bold uppercase text-slate-700 mb-1">Owner PIN (4 Digits)</label>
-          <input type="text" id="newOwnerPinInput" inputmode="numeric" maxlength="4"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
-            class="w-full text-center tracking-widest rounded-xl border border-slate-300 px-3 py-2.5 text-base font-black text-slate-900 focus:border-blue-600 outline-none" />
-        </div>
-        <div>
-          <label for="newStaffPinInput" class="block text-xs font-bold uppercase text-slate-700 mb-1">Staff PIN (4 Digits)</label>
-          <input type="text" id="newStaffPinInput" inputmode="numeric" maxlength="4"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)"
-            class="w-full text-center tracking-widest rounded-xl border border-slate-300 px-3 py-2.5 text-base font-black text-slate-900 focus:border-blue-600 outline-none" />
-        </div>
-      </div>
-      <div class="flex items-center justify-end gap-2 pt-2">
-        <button type="button" onclick="closeModal('pinSettingsModal')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm">
-          Cancel
-        </button>
-        <button type="button" onclick="savePinSettings()" class="px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-bold text-sm shadow">
-          Update PINs
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. How to Use on Phone & PC Modal -->
-  <div id="setupGuideModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 my-auto">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
-        <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-          <i class="fa-solid fa-mobile-screen-button text-blue-600"></i>
-          <span>How to Use on Phone &amp; Computer</span>
-        </h3>
-        <button type="button" onclick="closeModal('setupGuideModal')" class="text-slate-400 hover:text-slate-700 p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs sm:text-sm text-slate-700">
-        <div class="bg-blue-50/70 p-3.5 rounded-xl border border-blue-200">
-          <h4 class="font-extrabold text-navy-900 mb-1">Step 1: Install as an App on Android Phone (Chrome)</h4>
-          <ol class="list-decimal list-inside space-y-1 text-slate-700">
-            <li>Open <strong>https://jagatsyadav.github.io/jagat-janseva-kendra/</strong> in <strong>Google Chrome</strong> on Owner Phone &amp; Staff Phone.</li>
-            <li>Tap the <strong>3 Dots (⋮)</strong> in the top-right corner of Chrome.</li>
-            <li>Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>.</li>
-            <li>An icon for <strong>JAGAT JAN SEVA KENDRA</strong> will appear on your home screen like a real app.</li>
-          </ol>
-        </div>
-
-        <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-200">
-          <h4 class="font-extrabold text-emerald-900 mb-1">Step 2: Login Credentials &amp; Backup</h4>
-          <ul class="list-disc list-inside space-y-1 text-slate-700">
-            <li>Center ID: <strong class="font-mono" id="guideCenterId">JJSK-MAIN-01</strong></li>
-            <li><strong>Owner</strong> logs in with Owner PIN (default <code class="bg-white px-1.5 py-0.5 rounded border">1234</code>).</li>
-            <li><strong>Shop Assistant</strong> logs in with Staff PIN (default <code class="bg-white px-1.5 py-0.5 rounded border">0000</code>).</li>
-            <li>Use <strong>JSON Backup</strong> and <strong>Restore JSON</strong> to transfer or back up data between devices anytime.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-end pt-1">
-        <button type="button" onclick="closeModal('setupGuideModal')" class="px-5 py-2.5 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-bold text-sm">
-          Got It
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4. Archive Day Confirmation Modal (Owner Only) -->
+  <!-- 4. Archive Day Confirmation Modal -->
   <div id="archiveConfirmModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-amber-200 space-y-4">
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl shrink-0">
           <i class="fa-solid fa-box-archive"></i>
@@ -798,7 +806,7 @@
       <div id="archiveModalSummaryBox" class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 text-xs sm:text-sm space-y-1.5 text-slate-700"></div>
 
       <p class="text-xs text-slate-500">
-        This will permanently save today's summary &amp; customer entries into <strong>Archive History</strong> and reset Today's Live Ledger and Opening Balance to <strong>₹0</strong> for tomorrow.
+        This will permanently save today's summary &amp; customer entries into <strong>Archive History</strong> and reset Transaction History and Opening Balance to <strong>₹0</strong> for tomorrow.
       </p>
 
       <div class="flex items-center justify-end gap-2 pt-2">
@@ -812,9 +820,9 @@
     </div>
   </div>
 
-  <!-- 5. Delete Entry Confirmation Modal (Owner Only) -->
+  <!-- 5. Delete Entry Confirmation Modal -->
   <div id="deleteConfirmModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl border border-slate-200 space-y-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 shadow-2xl border border-rose-200 space-y-4">
       <h3 class="font-extrabold text-slate-900 text-lg">Delete Transaction?</h3>
       <p id="deleteModalText" class="text-xs sm:text-sm text-slate-600">
         Are you sure you want to delete this entry?
@@ -830,9 +838,9 @@
     </div>
   </div>
 
-  <!-- 6. Manage Villages Modal (Add / Edit / Delete Villages) -->
+  <!-- 6. Manage Villages Modal -->
   <div id="manageVillagesModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-slate-200 space-y-4 my-auto">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-indigo-200 space-y-4 my-auto">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
           <i class="fa-solid fa-map-location-dot text-blue-600"></i>
@@ -843,17 +851,12 @@
         </button>
       </div>
 
-      <p class="text-xs text-slate-600">
-        Add, edit, or delete villages from your dropdown list.
-      </p>
-
-      <!-- Add / Edit Village Form -->
       <div class="flex items-center gap-2">
         <input type="hidden" id="editVillageIndex" value="-1" />
         <input type="text" id="villageFormInput" placeholder="Enter village name..."
           class="flex-1 rounded-xl border border-slate-300 px-3.5 py-2 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
         <button type="button" id="saveVillageBtn" onclick="saveVillageItem()"
-          class="px-4 py-2 rounded-xl bg-navy-800 hover:bg-navy-900 text-white font-bold text-xs sm:text-sm shadow transition">
+          class="px-4 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm shadow transition">
           Add
         </button>
         <button type="button" id="cancelVillageEditBtn" onclick="resetVillageForm()"
@@ -862,7 +865,6 @@
         </button>
       </div>
 
-      <!-- Current Villages List -->
       <div id="villageListContainer" class="max-h-60 overflow-y-auto divide-y divide-slate-200 border border-slate-200 rounded-xl bg-slate-50/60"></div>
 
       <div class="flex items-center justify-end pt-1">
@@ -873,11 +875,48 @@
     </div>
   </div>
 
+  <!-- 7. Manage Payment Methods Modal -->
+  <div id="manageMethodsModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl border border-indigo-200 space-y-4 my-auto">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+        <h3 class="font-extrabold text-slate-900 text-lg flex items-center gap-2">
+          <i class="fa-solid fa-credit-card text-blue-600"></i>
+          <span>Manage Payment Methods</span>
+        </h3>
+        <button type="button" onclick="closeModal('manageMethodsModal')" class="text-slate-400 hover:text-slate-700 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input type="hidden" id="editMethodIndex" value="-1" />
+        <input type="text" id="methodFormInput" placeholder="Enter payment method..."
+          class="flex-1 rounded-xl border border-slate-300 px-3.5 py-2 text-sm font-semibold text-slate-900 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none" />
+        <button type="button" id="saveMethodBtn" onclick="saveMethodItem()"
+          class="px-4 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs sm:text-sm shadow transition">
+          Add
+        </button>
+        <button type="button" id="cancelMethodEditBtn" onclick="resetMethodForm()"
+          class="hidden px-3 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs">
+          Cancel
+        </button>
+      </div>
+
+      <div id="methodListContainer" class="max-h-60 overflow-y-auto divide-y divide-slate-200 border border-slate-200 rounded-xl bg-slate-50/60"></div>
+
+      <div class="flex items-center justify-end pt-1">
+        <button type="button" onclick="closeModal('manageMethodsModal')" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION BANNER -->
   <div id="toastContainer" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-xs sm:max-w-sm pointer-events-none"></div>
 
   <!-- ===================================================================== -->
-  <!-- APPLICATION LOGIC (FIREBASE + RELIABLE PERSISTENT LOCAL STORAGE)      -->
+  <!-- APPLICATION LOGIC                                                     -->
   <!-- ===================================================================== -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -885,7 +924,6 @@
     import {
       getFirestore,
       doc,
-      getDoc,
       setDoc,
       addDoc,
       updateDoc,
@@ -897,23 +935,45 @@
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'jagat-jan-seva-kendra';
     const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
 
+    const OFFICIAL_CSC_ID = '776350030014';
+
+    const DEFAULT_VILLAGES = [
+      'Mangupura',
+      'Jhakda',
+      'Gurgaon',
+      'Kasampur',
+      'Aehladpur Karar'
+    ];
+
+    const DEFAULT_METHODS = [
+      'DigiPay',
+      'PhonePe',
+      'Google Pay',
+      'Paytm',
+      'UPI',
+      'QR Code',
+      'Navipay',
+      'Cash',
+      'CSC',
+      'Group Loan',
+      'EMI',
+      'Bill'
+    ];
+
     let app = null;
     let auth = null;
     let db = null;
     let currentUser = null;
 
-    // Workspace & Role State
-    let centerCode = 'JJSK-MAIN-01';
-    let selectedLoginRole = 'Owner';
-    let activeRole = null; // 'Owner' | 'Staff'
-    let ownerPin = '1234';
-    let staffPin = '0000';
+    let centerCode = '776350030014';
+    let activeTypeFilter = 'ALL';
 
-    // Ledger State
     let openingBalance = 0;
     let todayTransactions = [];
     let archivedDays = [];
-    let villagesList = ['Mangupura', 'Jhakda'];
+    let villagesList = [...DEFAULT_VILLAGES];
+    let paymentMethodsList = [...DEFAULT_METHODS];
+    let customLogoDataUrl = '';
 
     let unsubMeta = null;
     let unsubTx = null;
@@ -921,7 +981,7 @@
     let pendingDeleteId = null;
 
     // -----------------------------------------------------------------------
-    // 0. PERSISTENT LOCAL STORAGE BACKUP (WORKS PERMANENTLY ON GITHUB PAGES)
+    // 0. PERSISTENT LOCAL STORAGE BACKUP
     // -----------------------------------------------------------------------
     function getStorageKey(ws) {
       return `jjsk_ledger_data_${ws || centerCode}`;
@@ -930,12 +990,12 @@
     function saveStateToLocal() {
       try {
         const data = {
-          ownerPin,
-          staffPin,
           openingBalance,
           todayTransactions,
           archivedDays,
           villagesList,
+          paymentMethodsList,
+          customLogoDataUrl,
           updatedAt: Date.now()
         };
         localStorage.setItem(getStorageKey(centerCode), JSON.stringify(data));
@@ -948,30 +1008,66 @@
       try {
         const raw = localStorage.getItem(getStorageKey(ws));
         if (!raw) {
-          ownerPin = '1234';
-          staffPin = '0000';
           openingBalance = 0;
           todayTransactions = [];
           archivedDays = [];
-          villagesList = ['Mangupura', 'Jhakda'];
+          villagesList = [...DEFAULT_VILLAGES];
+          paymentMethodsList = [...DEFAULT_METHODS];
+          customLogoDataUrl = '';
           return;
         }
         const parsed = JSON.parse(raw);
-        ownerPin = parsed.ownerPin && /^\d{4}$/.test(String(parsed.ownerPin)) ? String(parsed.ownerPin) : '1234';
-        staffPin = parsed.staffPin && /^\d{4}$/.test(String(parsed.staffPin)) ? String(parsed.staffPin) : '0000';
         openingBalance = Number(parsed.openingBalance) || 0;
         todayTransactions = Array.isArray(parsed.todayTransactions) ? parsed.todayTransactions : [];
         archivedDays = Array.isArray(parsed.archivedDays) ? parsed.archivedDays : [];
         villagesList = Array.isArray(parsed.villagesList) && parsed.villagesList.length > 0
           ? parsed.villagesList
-          : ['Mangupura', 'Jhakda'];
+          : [...DEFAULT_VILLAGES];
+        paymentMethodsList = Array.isArray(parsed.paymentMethodsList) && parsed.paymentMethodsList.length > 0
+          ? parsed.paymentMethodsList
+          : [...DEFAULT_METHODS];
+        customLogoDataUrl = parsed.customLogoDataUrl || '';
       } catch (e) {
         console.warn('Local storage load warning:', e);
       }
     }
 
+    function applyBrandLogo() {
+      const imgEl = document.getElementById('customLogoImg');
+      const svgEl = document.getElementById('defaultVectorLogo');
+      if (customLogoDataUrl) {
+        imgEl.src = customLogoDataUrl;
+        imgEl.classList.remove('hidden');
+        svgEl.classList.add('hidden');
+      } else {
+        imgEl.classList.add('hidden');
+        svgEl.classList.remove('hidden');
+      }
+    }
+
+    window.handleLogoUpload = function(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        customLogoDataUrl = ev.target?.result || '';
+        applyBrandLogo();
+        saveStateToLocal();
+        showToast('Center logo updated!');
+      };
+      reader.readAsDataURL(file);
+      event.target.value = '';
+    };
+
+    window.resetCenterLogo = function() {
+      customLogoDataUrl = '';
+      applyBrandLogo();
+      saveStateToLocal();
+      showToast('Restored Royal CSC Emblem', 'info');
+    };
+
     // -----------------------------------------------------------------------
-    // 1. LIVE CLOCK (DD-MM-YYYY & HH:MM:SS AM/PM)
+    // 1. COMPACT HEADER CLOCK (DD-MM-YYYY & HH:MM:SS AM/PM)
     // -----------------------------------------------------------------------
     function getFormattedDate(dateObj = new Date()) {
       const dd = String(dateObj.getDate()).padStart(2, '0');
@@ -994,19 +1090,15 @@
     function startLiveClock() {
       const tick = () => {
         const now = new Date();
-        const dStr = getFormattedDate(now);
-        const tStr = getFormattedTime(now);
-        document.getElementById('liveDateDisplay').textContent = dStr;
-        document.getElementById('liveTimeDisplay').textContent = tStr;
-        document.getElementById('kpiLiveDate').textContent = dStr;
-        document.getElementById('kpiLiveTime').textContent = tStr;
+        document.getElementById('liveDateDisplay').textContent = getFormattedDate(now);
+        document.getElementById('liveTimeDisplay').textContent = getFormattedTime(now);
       };
       tick();
       setInterval(tick, 1000);
     }
 
     // -----------------------------------------------------------------------
-    // 2. HELPERS
+    // 2. HELPERS & COLORFUL MODE BADGES
     // -----------------------------------------------------------------------
     function escapeHtml(str) {
       if (str === null || str === undefined) return '';
@@ -1023,10 +1115,27 @@
       return '₹' + val.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
     }
 
+    function getPaymentModeBadge(mode) {
+      const m = (mode || '').toLowerCase();
+      let colorClasses = 'bg-slate-100 text-slate-800 border-slate-300';
+      if (m.includes('digipay') || m.includes('csc')) {
+        colorClasses = 'bg-blue-100 text-blue-800 border-blue-300';
+      } else if (m.includes('phonepe')) {
+        colorClasses = 'bg-purple-100 text-purple-800 border-purple-300';
+      } else if (m.includes('google') || m.includes('paytm') || m.includes('upi') || m.includes('qr')) {
+        colorClasses = 'bg-cyan-100 text-cyan-800 border-cyan-300';
+      } else if (m.includes('cash')) {
+        colorClasses = 'bg-emerald-100 text-emerald-800 border-emerald-300';
+      } else if (m.includes('navi') || m.includes('loan') || m.includes('emi') || m.includes('bill')) {
+        colorClasses = 'bg-amber-100 text-amber-900 border-amber-300';
+      }
+      return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-extrabold border ${colorClasses}">${escapeHtml(mode)}</span>`;
+    }
+
     window.showToast = function(message, type = 'success') {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
-      const bgClass = type === 'error' ? 'bg-rose-600' : type === 'info' ? 'bg-navy-800' : 'bg-emerald-600';
+      const bgClass = type === 'error' ? 'bg-rose-600' : type === 'info' ? 'bg-indigo-800' : 'bg-emerald-600';
       const iconClass = type === 'error' ? 'fa-circle-exclamation' : type === 'info' ? 'fa-circle-info' : 'fa-circle-check';
 
       toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg text-xs sm:text-sm font-semibold flex items-center gap-2.5 transition-all duration-300 pointer-events-auto`;
@@ -1049,20 +1158,21 @@
     // -----------------------------------------------------------------------
     function updateCloudBadges(label) {
       const d = document.getElementById('syncTextDesktop');
-      const m = document.getElementById('syncTextMobile');
       if (d) d.textContent = label;
-      if (m) m.textContent = label;
     }
 
     async function initFirebase() {
       loadStateFromLocal(centerCode);
+      applyBrandLogo();
       renderVillagesDatalist();
       renderVillagesModalList();
+      renderMethodsDropdown();
+      renderMethodsModalList();
       renderAll();
       renderArchiveHistory();
 
       if (!firebaseConfig) {
-        updateCloudBadges('Auto-Saved Locally');
+        updateCloudBadges('Live');
         return;
       }
 
@@ -1080,13 +1190,13 @@
         onAuthStateChanged(auth, (user) => {
           currentUser = user;
           if (user) {
-            updateCloudBadges('Cloud Connected');
+            updateCloudBadges('Synced');
             attachRealtimeListeners(centerCode);
           }
         });
       } catch (err) {
         console.warn('Running in local auto-save mode:', err);
-        updateCloudBadges('Auto-Saved Locally');
+        updateCloudBadges('Saved');
       }
     }
 
@@ -1107,15 +1217,18 @@
           if (docSnap.exists()) {
             const data = docSnap.data();
             openingBalance = Number(data.openingBalance) || 0;
-            if (data.ownerPin && /^\d{4}$/.test(String(data.ownerPin))) ownerPin = String(data.ownerPin);
-            if (data.staffPin && /^\d{4}$/.test(String(data.staffPin))) staffPin = String(data.staffPin);
             if (Array.isArray(data.villages) && data.villages.length > 0) {
               villagesList = data.villages;
+            }
+            if (Array.isArray(data.paymentMethods) && data.paymentMethods.length > 0) {
+              paymentMethodsList = data.paymentMethods;
             }
             saveStateToLocal();
           }
           renderVillagesDatalist();
           renderVillagesModalList();
+          renderMethodsDropdown();
+          renderMethodsModalList();
           renderAll();
         },
         (err) => console.error('Meta listener error:', err)
@@ -1153,156 +1266,1089 @@
     }
 
     // -----------------------------------------------------------------------
-    // 4. ROLE-BASED PIN LOGIN & PERMISSION ENFORCEMENT
+    // 4. SETTINGS & COPY CSC ID
     // -----------------------------------------------------------------------
-    window.selectLoginRole = function(role) {
-      selectedLoginRole = role;
-      const ownerBtn = document.getElementById('loginRoleOwnerBtn');
-      const staffBtn = document.getElementById('loginRoleStaffBtn');
-
-      if (role === 'Owner') {
-        ownerBtn.className = 'py-3 px-4 rounded-2xl border-2 border-navy-800 bg-blue-50/70 text-navy-900 font-extrabold text-sm flex flex-col items-center gap-1 transition';
-        staffBtn.className = 'py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-300 font-extrabold text-sm flex flex-col items-center gap-1 transition';
-      } else {
-        staffBtn.className = 'py-3 px-4 rounded-2xl border-2 border-navy-800 bg-blue-50/70 text-navy-900 font-extrabold text-sm flex flex-col items-center gap-1 transition';
-        ownerBtn.className = 'py-3 px-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 hover:border-slate-300 font-extrabold text-sm flex flex-col items-center gap-1 transition';
-      }
-      document.getElementById('loginErrorMsg').classList.add('hidden');
-      document.getElementById('loginPinInput').value = '';
-      document.getElementById('loginPinInput').focus();
-    };
-
-    window.onLoginCenterIdInput = function(val) {
-      const clean = val.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-      if (clean && clean !== centerCode) {
-        centerCode = clean;
-        loadStateFromLocal(centerCode);
-        if (db && currentUser) {
-          attachRealtimeListeners(centerCode);
-        }
-      }
-    };
-
-    window.handleLoginSubmit = async function(e) {
-      e.preventDefault();
-      const rawCenter = document.getElementById('loginCenterId').value.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
-      const enteredPin = document.getElementById('loginPinInput').value.trim();
-      const errorBox = document.getElementById('loginErrorMsg');
-
-      if (!rawCenter) {
-        errorBox.textContent = 'Please enter a valid Center Workspace ID.';
-        errorBox.classList.remove('hidden');
-        return;
-      }
-
-      if (rawCenter !== centerCode) {
-        centerCode = rawCenter;
-        loadStateFromLocal(centerCode);
-        if (db && currentUser) {
-          attachRealtimeListeners(centerCode);
-          try {
-            const metaDocRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_meta_${centerCode}`, 'dashboard');
-            const snap = await getDoc(metaDocRef);
-            if (snap.exists()) {
-              const d = snap.data();
-              ownerPin = d.ownerPin ? String(d.ownerPin) : '1234';
-              staffPin = d.staffPin ? String(d.staffPin) : '0000';
-            }
-          } catch (err) {
-            console.error('PIN fetch error:', err);
-          }
-        }
-      }
-
-      const expectedPin = selectedLoginRole === 'Owner' ? ownerPin : staffPin;
-      if (enteredPin !== expectedPin) {
-        errorBox.textContent = `Incorrect ${selectedLoginRole} PIN. Please try again.`;
-        errorBox.classList.remove('hidden');
-        document.getElementById('loginPinInput').value = '';
-        document.getElementById('loginPinInput').focus();
-        return;
-      }
-
-      errorBox.classList.add('hidden');
-      activeRole = selectedLoginRole;
-
-      document.getElementById('centerCodeBadge').textContent = centerCode;
-      document.getElementById('guideCenterId').textContent = centerCode;
-      applyRolePermissions();
-
-      document.getElementById('loginOverlay').classList.add('hidden');
-      document.getElementById('loginPinInput').value = '';
-      renderVillagesDatalist();
-      renderAll();
-      renderArchiveHistory();
-      showToast(`Logged in as ${activeRole} (${centerCode})`, 'success');
-    };
-
-    function applyRolePermissions() {
-      const isOwner = activeRole === 'Owner';
-      const roleBadge = document.getElementById('activeRoleBadge');
-      roleBadge.textContent = activeRole;
-      roleBadge.className = isOwner
-        ? 'px-2 py-0.5 rounded-lg bg-amber-400 text-slate-950 font-black uppercase'
-        : 'px-2 py-0.5 rounded-lg bg-emerald-400 text-slate-950 font-black uppercase';
-
-      document.getElementById('editOpeningBtn').classList.toggle('hidden', !isOwner);
-      document.getElementById('pinSettingsBtn').classList.toggle('hidden', !isOwner);
-      document.getElementById('manageVillagesBtn').classList.toggle('hidden', !isOwner);
-      document.getElementById('archiveDayBtn').classList.toggle('hidden', !isOwner);
-      document.getElementById('staffArchiveLockedNote').classList.toggle('hidden', isOwner);
-      document.getElementById('jsonRestoreLabel').classList.toggle('hidden', !isOwner);
-    }
-
-    window.openSwitchUserModal = function() {
-      resetTransactionForm();
-      document.getElementById('loginCenterId').value = centerCode;
-      document.getElementById('loginPinInput').value = '';
-      document.getElementById('loginErrorMsg').classList.add('hidden');
-      document.getElementById('loginOverlay').classList.remove('hidden');
-      setTimeout(() => document.getElementById('loginPinInput').focus(), 100);
-    };
-
-    window.copyCenterCode = function() {
+    window.copyCscId = function() {
       const temp = document.createElement('input');
-      temp.value = centerCode;
+      temp.value = OFFICIAL_CSC_ID;
       document.body.appendChild(temp);
       temp.select();
       document.execCommand('copy');
       document.body.removeChild(temp);
-      showToast(`Copied Center ID: ${centerCode}`, 'info');
+      showToast(`Copied CSC ID: ${OFFICIAL_CSC_ID}`, 'info');
     };
 
-    window.openSetupGuideModal = function() {
-      document.getElementById('guideCenterId').textContent = centerCode;
-      document.getElementById('setupGuideModal').classList.remove('hidden');
+    window.openSettingsModal = function() {
+      document.getElementById('settingsModal').classList.remove('hidden');
     };
 
-    window.downloadCleanHtmlFile = function() {
-      const clone = document.documentElement.cloneNode(true);
-      // Ensure login screen is visible and all modals are closed in downloaded file
-      const loginOv = clone.querySelector('#loginOverlay');
-      if (loginOv) loginOv.classList.remove('hidden');
-      ['openingBalanceModal', 'pinSettingsModal', 'setupGuideModal', 'archiveConfirmModal', 'deleteConfirmModal', 'manageVillagesModal'].forEach(id => {
-        const m = clone.querySelector('#' + id);
-        if (m) m.classList.add('hidden');
-      });
-      const toastC = clone.querySelector('#toastContainer');
-      if (toastC) toastC.innerHTML = '';
+    window.setTypeFilter = function(filterType) {
+      activeTypeFilter = filterType;
+      const allBtn = document.getElementById('filterAllBtn');
+      const depBtn = document.getElementById('filterDepBtn');
+      const withBtn = document.getElementById('filterWithBtn');
 
-      const fullHtml = '<!DOCTYPE html>\n' + clone.outerHTML;
-      const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'index.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      showToast('Clean index.html downloaded!');
+      allBtn.className = filterType === 'ALL'
+        ? 'px-3.5 py-1.5 rounded-xl bg-slate-900 text-white shadow-xs transition'
+        : 'px-3.5 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition';
+      depBtn.className = filterType === 'DEPOSIT'
+        ? 'px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white shadow-xs transition'
+        : 'px-3.5 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition';
+      withBtn.className = filterType === 'WITHDRAWAL'
+        ? 'px-3.5 py-1.5 rounded-xl bg-rose-600 text-white shadow-xs transition'
+        : 'px-3.5 py-1.5 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition';
+
+      renderTodayLedger();
     };
 
     // -----------------------------------------------------------------------
     // 4B. MANAGE VILLAGES (ADD / EDIT / DELETE)
-// ... existing code ... -->
+    // -----------------------------------------------------------------------
+    function renderVillagesDatalist() {
+      const dl = document.getElementById('villageOptions');
+      if (!dl) return;
+      dl.innerHTML = villagesList
+        .map(v => `<option value="${escapeHtml(v)}"></option>`)
+        .join('');
+    }
+
+    function renderVillagesModalList() {
+      const container = document.getElementById('villageListContainer');
+      if (!container) return;
+
+      if (villagesList.length === 0) {
+        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-500">No villages added yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = villagesList.map((v, idx) => `
+        <div class="px-3.5 py-2.5 flex items-center justify-between gap-2 bg-white">
+          <span class="font-bold text-slate-800 text-sm">${escapeHtml(v)}</span>
+          <div class="flex items-center gap-1.5">
+            <button type="button" onclick="editVillageItem(${idx})"
+              class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-bold">
+              <i class="fa-solid fa-pen mr-1"></i>Edit
+            </button>
+            <button type="button" onclick="deleteVillageItem(${idx})"
+              class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.openManageVillagesModal = function() {
+      resetVillageForm();
+      renderVillagesModalList();
+      document.getElementById('manageVillagesModal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('villageFormInput').focus(), 100);
+    };
+
+    window.resetVillageForm = function() {
+      document.getElementById('editVillageIndex').value = '-1';
+      document.getElementById('villageFormInput').value = '';
+      document.getElementById('saveVillageBtn').textContent = 'Add';
+      document.getElementById('cancelVillageEditBtn').classList.add('hidden');
+    };
+
+    window.editVillageItem = function(idx) {
+      document.getElementById('editVillageIndex').value = String(idx);
+      document.getElementById('villageFormInput').value = villagesList[idx] || '';
+      document.getElementById('saveVillageBtn').textContent = 'Update';
+      document.getElementById('cancelVillageEditBtn').classList.remove('hidden');
+      document.getElementById('villageFormInput').focus();
+    };
+
+    async function persistVillagesList(updatedList) {
+      villagesList = updatedList;
+      saveStateToLocal();
+      renderVillagesDatalist();
+      renderVillagesModalList();
+
+      if (db && currentUser) {
+        try {
+          const metaDocRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_meta_${centerCode}`, 'dashboard');
+          await setDoc(metaDocRef, { villages: updatedList, updatedAt: Date.now() }, { merge: true });
+        } catch (err) {
+          console.error('Error syncing villages:', err);
+        }
+      }
+    }
+
+    window.saveVillageItem = async function() {
+      const input = document.getElementById('villageFormInput');
+      const name = input.value.trim();
+      const editIdx = parseInt(document.getElementById('editVillageIndex').value, 10);
+
+      if (!name) {
+        showToast('Please enter a village name.', 'error');
+        return;
+      }
+
+      const updated = [...villagesList];
+      if (editIdx >= 0 && editIdx < updated.length) {
+        updated[editIdx] = name;
+        showToast(`Updated village to "${name}"`);
+      } else {
+        if (updated.some(v => v.toLowerCase() === name.toLowerCase())) {
+          showToast('This village is already in the list.', 'info');
+          return;
+        }
+        updated.push(name);
+        showToast(`Added village "${name}"`);
+      }
+
+      resetVillageForm();
+      await persistVillagesList(updated);
+    };
+
+    window.deleteVillageItem = async function(idx) {
+      const removed = villagesList[idx];
+      const updated = villagesList.filter((_, i) => i !== idx);
+      await persistVillagesList(updated);
+      showToast(`Removed "${removed}"`, 'info');
+    };
+
+    // -----------------------------------------------------------------------
+    // 4C. MANAGE PAYMENT METHODS (ADD / EDIT / DELETE)
+    // -----------------------------------------------------------------------
+    function renderMethodsDropdown() {
+      const select = document.getElementById('paymentMethod');
+      if (!select) return;
+      const currentVal = select.value;
+      select.innerHTML = paymentMethodsList
+        .map(m => `<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`)
+        .join('');
+      if (currentVal && paymentMethodsList.includes(currentVal)) {
+        select.value = currentVal;
+      }
+    }
+
+    function renderMethodsModalList() {
+      const container = document.getElementById('methodListContainer');
+      if (!container) return;
+
+      if (paymentMethodsList.length === 0) {
+        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-500">No payment methods added yet.</div>`;
+        return;
+      }
+
+      container.innerHTML = paymentMethodsList.map((m, idx) => `
+        <div class="px-3.5 py-2.5 flex items-center justify-between gap-2 bg-white">
+          <span class="font-bold text-slate-800 text-sm">${escapeHtml(m)}</span>
+          <div class="flex items-center gap-1.5">
+            <button type="button" onclick="editMethodItem(${idx})"
+              class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-bold">
+              <i class="fa-solid fa-pen mr-1"></i>Edit
+            </button>
+            <button type="button" onclick="deleteMethodItem(${idx})"
+              class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.openManageMethodsModal = function() {
+      resetMethodForm();
+      renderMethodsModalList();
+      document.getElementById('manageMethodsModal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('methodFormInput').focus(), 100);
+    };
+
+    window.resetMethodForm = function() {
+      document.getElementById('editMethodIndex').value = '-1';
+      document.getElementById('methodFormInput').value = '';
+      document.getElementById('saveMethodBtn').textContent = 'Add';
+      document.getElementById('cancelMethodEditBtn').classList.add('hidden');
+    };
+
+    window.editMethodItem = function(idx) {
+      document.getElementById('editMethodIndex').value = String(idx);
+      document.getElementById('methodFormInput').value = paymentMethodsList[idx] || '';
+      document.getElementById('saveMethodBtn').textContent = 'Update';
+      document.getElementById('cancelMethodEditBtn').classList.remove('hidden');
+      document.getElementById('methodFormInput').focus();
+    };
+
+    async function persistMethodsList(updatedList) {
+      paymentMethodsList = updatedList;
+      saveStateToLocal();
+      renderMethodsDropdown();
+      renderMethodsModalList();
+
+      if (db && currentUser) {
+        try {
+          const metaDocRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_meta_${centerCode}`, 'dashboard');
+          await setDoc(metaDocRef, { paymentMethods: updatedList, updatedAt: Date.now() }, { merge: true });
+        } catch (err) {
+          console.error('Error syncing payment methods:', err);
+        }
+      }
+    }
+
+    window.saveMethodItem = async function() {
+      const input = document.getElementById('methodFormInput');
+      const name = input.value.trim();
+      const editIdx = parseInt(document.getElementById('editMethodIndex').value, 10);
+
+      if (!name) {
+        showToast('Please enter a payment method name.', 'error');
+        return;
+      }
+
+      const updated = [...paymentMethodsList];
+      if (editIdx >= 0 && editIdx < updated.length) {
+        updated[editIdx] = name;
+        showToast(`Updated payment method to "${name}"`);
+      } else {
+        if (updated.some(m => m.toLowerCase() === name.toLowerCase())) {
+          showToast('This payment method is already in the list.', 'info');
+          return;
+        }
+        updated.push(name);
+        showToast(`Added payment method "${name}"`);
+      }
+
+      resetMethodForm();
+      await persistMethodsList(updated);
+    };
+
+    window.deleteMethodItem = async function(idx) {
+      if (paymentMethodsList.length <= 1) {
+        showToast('At least one payment method is required.', 'error');
+        return;
+      }
+      const removed = paymentMethodsList[idx];
+      const updated = paymentMethodsList.filter((_, i) => i !== idx);
+      await persistMethodsList(updated);
+      showToast(`Removed "${removed}"`, 'info');
+    };
+
+    // -----------------------------------------------------------------------
+    // 5. FORM INPUT HELPERS
+    // -----------------------------------------------------------------------
+    window.formatAadhaarInput = function(input) {
+      const digits = input.value.replace(/\D/g, '').slice(0, 12);
+      const parts = digits.match(/.{1,4}/g);
+      input.value = parts ? parts.join('-') : '';
+    };
+
+    window.quickSelectElectricityBill = function() {
+      document.getElementById('txType').value = 'Electricity Bill';
+      document.getElementById('txAmount').focus();
+      showToast('Transaction Type set to Electricity Bill', 'info');
+    };
+
+    function isDepositType(txType) {
+      return txType === 'Deposit' || txType === 'Electricity Bill';
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. OPENING BALANCE
+    // -----------------------------------------------------------------------
+    window.openOpeningBalanceModal = function() {
+      document.getElementById('openingBalanceInput').value = openingBalance || '';
+      document.getElementById('openingBalanceModal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('openingBalanceInput').focus(), 100);
+    };
+
+    window.saveOpeningBalance = async function() {
+      const rawVal = parseFloat(document.getElementById('openingBalanceInput').value);
+      const newVal = isNaN(rawVal) || rawVal < 0 ? 0 : rawVal;
+
+      openingBalance = newVal;
+      saveStateToLocal();
+      renderAll();
+      closeModal('openingBalanceModal');
+      showToast(`Opening Balance updated to ${formatCurrency(newVal)}`);
+
+      if (db && currentUser) {
+        try {
+          const metaDocRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_meta_${centerCode}`, 'dashboard');
+          await setDoc(metaDocRef, { openingBalance: newVal, updatedAt: Date.now() }, { merge: true });
+        } catch (err) {
+          console.error('Error saving opening balance:', err);
+        }
+      }
+    };
+
+    // -----------------------------------------------------------------------
+    // 7. ADD / EDIT / DELETE TRANSACTIONS
+    // -----------------------------------------------------------------------
+    window.handleTransactionSubmit = async function(e) {
+      e.preventDefault();
+
+      const customerName = document.getElementById('customerName').value.trim();
+      const village = document.getElementById('villageName').value.trim();
+      const mobile = document.getElementById('mobileNumber').value.trim();
+      const aadhaar = document.getElementById('aadhaarNumber').value.trim();
+      const txType = document.getElementById('txType').value;
+      const paymentMethod = document.getElementById('paymentMethod').value;
+      const amountVal = parseFloat(document.getElementById('txAmount').value);
+      const custBalRaw = document.getElementById('customerBalance').value.trim();
+      const customerBalance = custBalRaw === '' ? '' : Number(custBalRaw);
+      const remarks = document.getElementById('remarksInput').value.trim();
+      const editId = document.getElementById('editEntryId').value;
+
+      if (!customerName || !village || isNaN(amountVal) || amountVal <= 0) {
+        showToast('Please enter Customer Name, Village, and valid Amount.', 'error');
+        return;
+      }
+
+      if (!villagesList.some(v => v.toLowerCase() === village.toLowerCase())) {
+        await persistVillagesList([...villagesList, village]);
+      }
+
+      const now = new Date();
+      const submitBtn = document.getElementById('submitTxBtn');
+      submitBtn.disabled = true;
+
+      try {
+        if (editId) {
+          const idx = todayTransactions.findIndex(t => t.id === editId);
+          if (idx !== -1) {
+            todayTransactions[idx] = {
+              ...todayTransactions[idx],
+              customerName,
+              village,
+              mobile,
+              aadhaar,
+              txType,
+              paymentMethod,
+              amount: amountVal,
+              customerBalance,
+              remarks,
+              updatedAt: Date.now()
+            };
+          }
+          saveStateToLocal();
+          renderAll();
+
+          if (db && currentUser) {
+            const docRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_tx_${centerCode}`, editId);
+            await updateDoc(docRef, {
+              customerName,
+              village,
+              mobile,
+              aadhaar,
+              txType,
+              paymentMethod,
+              amount: amountVal,
+              customerBalance,
+              remarks,
+              updatedAt: Date.now()
+            });
+          }
+          showToast('Transaction updated!');
+        } else {
+          const newEntry = {
+            id: 'tx_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+            date: getFormattedDate(now),
+            time: getFormattedTime(now),
+            customerName,
+            village,
+            mobile,
+            aadhaar,
+            txType,
+            paymentMethod,
+            amount: amountVal,
+            customerBalance,
+            remarks,
+            createdAt: Date.now()
+          };
+
+          todayTransactions.push(newEntry);
+          saveStateToLocal();
+          renderAll();
+
+          if (db && currentUser) {
+            const txColRef = collection(db, 'artifacts', appId, 'public', 'data', `jjsk_tx_${centerCode}`);
+            await addDoc(txColRef, newEntry);
+          }
+          showToast(`Saved ${txType} of ${formatCurrency(amountVal)}`);
+        }
+
+        resetTransactionForm();
+      } catch (err) {
+        console.error('Save transaction error:', err);
+        showToast('Saved locally.', 'info');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    };
+
+    window.startEditTransaction = function(txId) {
+      const tx = todayTransactions.find(item => item.id === txId);
+      if (!tx) return;
+
+      document.getElementById('editEntryId').value = tx.id;
+      document.getElementById('customerName').value = tx.customerName || '';
+      document.getElementById('villageName').value = tx.village || '';
+      document.getElementById('mobileNumber').value = tx.mobile || '';
+      document.getElementById('aadhaarNumber').value = tx.aadhaar || '';
+      document.getElementById('txType').value = tx.txType || 'Withdrawal';
+
+      const methodSelect = document.getElementById('paymentMethod');
+      if (tx.paymentMethod && !paymentMethodsList.includes(tx.paymentMethod)) {
+        const opt = document.createElement('option');
+        opt.value = tx.paymentMethod;
+        opt.textContent = tx.paymentMethod;
+        methodSelect.appendChild(opt);
+      }
+      methodSelect.value = tx.paymentMethod || paymentMethodsList[0] || 'DigiPay';
+
+      document.getElementById('txAmount').value = tx.amount || '';
+      document.getElementById('customerBalance').value = tx.customerBalance !== '' && tx.customerBalance !== undefined ? tx.customerBalance : '';
+      document.getElementById('remarksInput').value = tx.remarks || '';
+
+      document.getElementById('formHeading').textContent = `Editing Entry: ${tx.customerName}`;
+      document.getElementById('submitTxBtnText').textContent = 'Update Entry';
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+
+      document.getElementById('transactionForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    window.resetTransactionForm = function() {
+      document.getElementById('transactionForm').reset();
+      document.getElementById('editEntryId').value = '';
+      document.getElementById('formHeading').textContent = 'New Customer Entry';
+      document.getElementById('submitTxBtnText').textContent = 'Save Entry';
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+    };
+
+    window.promptDeleteTransaction = function(txId) {
+      const tx = todayTransactions.find(item => item.id === txId);
+      if (!tx) return;
+
+      pendingDeleteId = txId;
+      document.getElementById('deleteModalText').textContent =
+        `Delete ${tx.txType} of ${formatCurrency(tx.amount)} for ${tx.customerName}? Shop Remaining Balance will recalculate automatically.`;
+      document.getElementById('deleteConfirmModal').classList.remove('hidden');
+    };
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+      if (!pendingDeleteId) return;
+      const idToDelete = pendingDeleteId;
+      pendingDeleteId = null;
+      closeModal('deleteConfirmModal');
+
+      todayTransactions = todayTransactions.filter(t => t.id !== idToDelete);
+      saveStateToLocal();
+      renderAll();
+
+      if (db && currentUser) {
+        try {
+          const docRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_tx_${centerCode}`, idToDelete);
+          await deleteDoc(docRef);
+        } catch (err) {
+          console.error('Delete error:', err);
+        }
+      }
+      showToast('Transaction deleted.', 'info');
+    });
+
+    // -----------------------------------------------------------------------
+    // 8. CALCULATIONS & COLORFUL LEDGER RENDERING
+    // -----------------------------------------------------------------------
+    function computeLedgerWithRunningBalance() {
+      let runningShopBal = Number(openingBalance) || 0;
+      let totalDeposits = 0;
+      let totalWithdrawals = 0;
+      let electricityTotal = 0;
+      let electricityCount = 0;
+
+      const enriched = todayTransactions.map((tx, idx) => {
+        const amt = Number(tx.amount) || 0;
+        const isDep = isDepositType(tx.txType);
+
+        if (tx.txType === 'Electricity Bill') {
+          electricityTotal += amt;
+          electricityCount += 1;
+        }
+
+        if (isDep) {
+          totalDeposits += amt;
+          runningShopBal += amt;
+        } else {
+          totalWithdrawals += amt;
+          runningShopBal -= amt;
+        }
+
+        return {
+          ...tx,
+          serialNo: idx + 1,
+          depositAmt: isDep ? amt : 0,
+          withdrawalAmt: !isDep ? amt : 0,
+          shopRemainingBalance: runningShopBal
+        };
+      });
+
+      return {
+        rows: enriched,
+        totalDeposits,
+        totalWithdrawals,
+        electricityTotal,
+        electricityCount,
+        netFlow: totalDeposits - totalWithdrawals,
+        currentShopBalance: runningShopBal,
+        totalTransactions: enriched.length
+      };
+    }
+
+    function renderAll() {
+      const stats = computeLedgerWithRunningBalance();
+
+      document.getElementById('kpiOpeningBalance').textContent = formatCurrency(openingBalance);
+      document.getElementById('kpiTotalDeposits').textContent = formatCurrency(stats.totalDeposits);
+      document.getElementById('kpiTotalWithdrawals').textContent = formatCurrency(stats.totalWithdrawals);
+      document.getElementById('kpiElectricityTotal').textContent = formatCurrency(stats.electricityTotal);
+      document.getElementById('kpiElectricityCount').textContent = `${stats.electricityCount} Bill(s) Paid`;
+      document.getElementById('kpiNetFlow').textContent = (stats.netFlow >= 0 ? '+' : '') + formatCurrency(stats.netFlow);
+      document.getElementById('kpiCurrentBalance').textContent = formatCurrency(stats.currentShopBalance);
+      document.getElementById('kpiTotalTransactions').textContent = stats.totalTransactions;
+      document.getElementById('tabTodayCount').textContent = stats.totalTransactions;
+
+      renderTodayLedger(stats.rows);
+    }
+
+    window.renderTodayLedger = function(precomputedRows = null) {
+      const rows = precomputedRows || computeLedgerWithRunningBalance().rows;
+      const query = (document.getElementById('todaySearchInput').value || '').trim().toLowerCase();
+
+      const filtered = rows.filter(r => {
+        if (activeTypeFilter === 'DEPOSIT' && r.depositAmt <= 0) return false;
+        if (activeTypeFilter === 'WITHDRAWAL' && r.withdrawalAmt <= 0) return false;
+        if (!query) return true;
+        return (
+          (r.customerName || '').toLowerCase().includes(query) ||
+          (r.village || '').toLowerCase().includes(query) ||
+          (r.mobile || '').toLowerCase().includes(query) ||
+          (r.aadhaar || '').toLowerCase().includes(query) ||
+          (r.txType || '').toLowerCase().includes(query) ||
+          (r.paymentMethod || '').toLowerCase().includes(query)
+        );
+      });
+
+      const tbody = document.getElementById('todayTableBody');
+      const mobileContainer = document.getElementById('todayMobileCards');
+      const emptyState = document.getElementById('todayEmptyState');
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        mobileContainer.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      tbody.innerHTML = filtered.map(r => {
+        const isDep = r.depositAmt > 0;
+        const rowTint = isDep ? 'hover:bg-emerald-50/60' : 'hover:bg-rose-50/60';
+        const typeBadge = isDep
+          ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-300"><i class="fa-solid fa-arrow-down text-[10px]"></i>${escapeHtml(r.txType)}</span>`
+          : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-rose-100 text-rose-800 border border-rose-300"><i class="fa-solid fa-arrow-up text-[10px]"></i>${escapeHtml(r.txType)}</span>`;
+
+        return `
+          <tr class="${rowTint} transition">
+            <td class="py-3 px-3 font-extrabold text-indigo-700">${r.serialNo}</td>
+            <td class="py-3 px-3 whitespace-nowrap">
+              <div class="font-bold text-slate-800 text-xs">${escapeHtml(r.date)}</div>
+              <div class="font-mono text-[11px] text-slate-500">${escapeHtml(r.time)}</div>
+            </td>
+            <td class="py-3 px-3">
+              <div class="font-extrabold text-slate-900">${escapeHtml(r.customerName)}</div>
+              ${r.mobile ? `<div class="font-mono text-[11px] text-blue-700"><i class="fa-solid fa-phone text-[9px] mr-1"></i>${escapeHtml(r.mobile)}</div>` : ''}
+            </td>
+            <td class="py-3 px-3 font-semibold text-slate-700">${escapeHtml(r.village)}</td>
+            <td class="py-3 px-3 font-mono text-xs text-slate-700 whitespace-nowrap">${escapeHtml(r.aadhaar || '—')}</td>
+            <td class="py-3 px-3 whitespace-nowrap">${typeBadge}</td>
+            <td class="py-3 px-3 whitespace-nowrap">${getPaymentModeBadge(r.paymentMethod)}</td>
+            <td class="py-3 px-3 text-right font-black text-emerald-600 whitespace-nowrap">
+              ${r.depositAmt > 0 ? '+' + formatCurrency(r.depositAmt) : '—'}
+            </td>
+            <td class="py-3 px-3 text-right font-black text-rose-600 whitespace-nowrap">
+              ${r.withdrawalAmt > 0 ? '-' + formatCurrency(r.withdrawalAmt) : '—'}
+            </td>
+            <td class="py-3 px-3 text-right font-black text-indigo-950 bg-amber-50/70 whitespace-nowrap">
+              ${formatCurrency(r.shopRemainingBalance)}
+            </td>
+            <td class="py-3 px-3 text-xs text-slate-600 max-w-[140px] truncate" title="${escapeHtml(r.remarks || '')}">
+              ${escapeHtml(r.remarks || '—')}
+            </td>
+            <td class="py-3 px-3 text-center whitespace-nowrap">
+              <div class="inline-flex items-center gap-1">
+                <button type="button" onclick="openReceiptSlip('${r.id}')" title="Print Customer Slip"
+                  class="p-1.5 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 transition">
+                  <i class="fa-solid fa-print"></i>
+                </button>
+                <button type="button" onclick="sendWhatsAppReceipt('${r.id}')" title="Send WhatsApp Receipt"
+                  class="p-1.5 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-800 transition">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <button type="button" onclick="startEditTransaction('${r.id}')" title="Edit Entry"
+                  class="p-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-800 transition">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" onclick="promptDeleteTransaction('${r.id}')" title="Delete Entry"
+                  class="p-1.5 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-800 transition">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      mobileContainer.innerHTML = filtered.slice().reverse().map(r => {
+        const isDep = r.depositAmt > 0;
+        const borderAccent = isDep ? 'border-l-4 border-l-emerald-500' : 'border-l-4 border-l-rose-500';
+        const amountColor = isDep ? 'text-emerald-600' : 'text-rose-600';
+        const sign = isDep ? '+' : '-';
+
+        return `
+          <div class="p-4 rounded-2xl bg-white shadow-xs border border-slate-200 ${borderAccent} space-y-2.5">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-black text-indigo-700">#${r.serialNo}</span>
+                  <h4 class="font-extrabold text-slate-900 text-sm">${escapeHtml(r.customerName)}</h4>
+                  ${getPaymentModeBadge(r.paymentMethod)}
+                </div>
+                <p class="text-xs text-slate-600 mt-1">
+                  <i class="fa-solid fa-location-dot text-blue-600 mr-1"></i>${escapeHtml(r.village)}
+                  ${r.mobile ? ` &bull; <i class="fa-solid fa-phone text-emerald-600 mx-0.5"></i>${escapeHtml(r.mobile)}` : ''}
+                  ${r.aadhaar ? ` &bull; <i class="fa-solid fa-id-card text-purple-600 mx-0.5"></i>${escapeHtml(r.aadhaar)}` : ''}
+                </p>
+              </div>
+              <div class="text-right">
+                <div class="text-base font-black ${amountColor}">${sign}${formatCurrency(r.amount)}</div>
+                <div class="text-[11px] font-bold text-slate-600">${escapeHtml(r.txType)}</div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs bg-gradient-to-r from-indigo-50 to-amber-50 px-3 py-2 rounded-xl border border-indigo-100">
+              <span class="text-slate-600 font-semibold">${escapeHtml(r.date)} &bull; ${escapeHtml(r.time)}</span>
+              <span class="font-black text-indigo-950">Shop Bal: ${formatCurrency(r.shopRemainingBalance)}</span>
+            </div>
+
+            <div class="flex items-center justify-end gap-2 pt-0.5 flex-wrap">
+              <button type="button" onclick="openReceiptSlip('${r.id}')"
+                class="px-2.5 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-bold text-xs flex items-center gap-1">
+                <i class="fa-solid fa-print"></i> Slip
+              </button>
+              <button type="button" onclick="sendWhatsAppReceipt('${r.id}')"
+                class="px-2.5 py-1.5 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center gap-1">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+              </button>
+              <button type="button" onclick="startEditTransaction('${r.id}')"
+                class="px-2.5 py-1.5 rounded-lg bg-amber-100 text-amber-900 font-bold text-xs flex items-center gap-1">
+                <i class="fa-solid fa-pen"></i> Edit
+              </button>
+              <button type="button" onclick="promptDeleteTransaction('${r.id}')"
+                class="px-2.5 py-1.5 rounded-lg bg-rose-100 text-rose-800 font-bold text-xs flex items-center gap-1">
+                <i class="fa-solid fa-trash"></i> Delete
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    // -----------------------------------------------------------------------
+    // 9. PRINTABLE RECEIPT SLIP & WHATSAPP RECEIPT
+    // -----------------------------------------------------------------------
+    window.openReceiptSlip = function(txId) {
+      const rows = computeLedgerWithRunningBalance().rows;
+      const r = rows.find(item => item.id === txId);
+      if (!r) return;
+
+      document.getElementById('receiptBodyContent').innerHTML = `
+        <div class="flex justify-between"><span>Receipt No:</span><strong>#${r.serialNo}</strong></div>
+        <div class="flex justify-between"><span>Date &amp; Time:</span><strong>${escapeHtml(r.date)} | ${escapeHtml(r.time)}</strong></div>
+        <div class="flex justify-between"><span>Customer Name:</span><strong>${escapeHtml(r.customerName)}</strong></div>
+        <div class="flex justify-between"><span>Village:</span><strong>${escapeHtml(r.village)}</strong></div>
+        ${r.mobile ? `<div class="flex justify-between"><span>Mobile:</span><strong>${escapeHtml(r.mobile)}</strong></div>` : ''}
+        ${r.aadhaar ? `<div class="flex justify-between"><span>Aadhaar:</span><strong class="font-mono">${escapeHtml(r.aadhaar)}</strong></div>` : ''}
+        <div class="border-t border-slate-200 my-1.5"></div>
+        <div class="flex justify-between"><span>Service / Type:</span><strong>${escapeHtml(r.txType)}</strong></div>
+        <div class="flex justify-between"><span>Payment Mode:</span><strong>${escapeHtml(r.paymentMethod)}</strong></div>
+        <div class="flex justify-between text-sm font-black text-navy-900 pt-1">
+          <span>Transaction Amount:</span><span>${formatCurrency(r.amount)}</span>
+        </div>
+        ${r.customerBalance !== '' && r.customerBalance !== undefined ? `<div class="flex justify-between text-emerald-700"><span>Customer A/c Bal:</span><strong>${formatCurrency(r.customerBalance)}</strong></div>` : ''}
+        ${r.remarks ? `<div class="flex justify-between"><span>Remarks:</span><strong>${escapeHtml(r.remarks)}</strong></div>` : ''}
+      `;
+
+      document.getElementById('receiptModal').classList.remove('hidden');
+    };
+
+    window.sendWhatsAppReceipt = function(txId) {
+      const rows = computeLedgerWithRunningBalance().rows;
+      const r = rows.find(item => item.id === txId);
+      if (!r) return;
+
+      const msgLines = [
+        `*JAGAT JANSEVA KENDRA*`,
+        `CSC ID: 776350030014`,
+        `Village & Post Mangupura, Tehsil Bilari, Dist. Moradabad, UP 244411`,
+        `-------------------------`,
+        `*Date:* ${r.date} | ${r.time}`,
+        `*Customer:* ${r.customerName}`,
+        `*Village:* ${r.village}`,
+        r.aadhaar ? `*Aadhaar:* ${r.aadhaar}` : null,
+        `*Type:* ${r.txType} (${r.paymentMethod})`,
+        `*Amount:* ${formatCurrency(r.amount)}`,
+        r.customerBalance !== '' && r.customerBalance !== undefined ? `*Available A/c Bal:* ${formatCurrency(r.customerBalance)}` : null,
+        r.remarks ? `*Note:* ${r.remarks}` : null,
+        `-------------------------`,
+        `जन सेवा, हमारा संकल्प — धन्यवाद!`
+      ].filter(Boolean).join('\n');
+
+      const cleanPhone = (r.mobile || '').replace(/\D/g, '');
+      const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+      const url = waPhone
+        ? `https://wa.me/${waPhone}?text=${encodeURIComponent(msgLines)}`
+        : `https://wa.me/?text=${encodeURIComponent(msgLines)}`;
+
+      window.open(url, '_blank');
+    };
+
+    // -----------------------------------------------------------------------
+    // 10. ARCHIVE DAY WORKFLOW
+    // -----------------------------------------------------------------------
+    window.confirmArchiveDay = function() {
+      const stats = computeLedgerWithRunningBalance();
+      if (stats.totalTransactions === 0 && openingBalance === 0) {
+        showToast('Today has no transactions or opening balance to archive.', 'info');
+        return;
+      }
+
+      const dateLabel = todayTransactions[0]?.date || getFormattedDate();
+      document.getElementById('archiveModalDateLabel').textContent = `DATE: ${dateLabel}`;
+      document.getElementById('archiveModalSummaryBox').innerHTML = `
+        <div class="flex justify-between"><span>Opening Balance:</span><strong>${formatCurrency(openingBalance)}</strong></div>
+        <div class="flex justify-between text-emerald-700"><span>Total Deposits:</span><strong>${formatCurrency(stats.totalDeposits)}</strong></div>
+        <div class="flex justify-between text-rose-700"><span>Total Withdrawals:</span><strong>${formatCurrency(stats.totalWithdrawals)}</strong></div>
+        <div class="flex justify-between border-t border-slate-200 pt-1.5 text-navy-900 font-extrabold">
+          <span>Closing Shop Balance:</span><span>${formatCurrency(stats.currentShopBalance)}</span>
+        </div>
+        <div class="flex justify-between text-xs text-slate-500 pt-1">
+          <span>Total Customer Entries:</span><strong>${stats.totalTransactions}</strong>
+        </div>
+      `;
+
+      document.getElementById('archiveConfirmModal').classList.remove('hidden');
+    };
+
+    window.executeArchiveDay = async function() {
+      closeModal('archiveConfirmModal');
+
+      const stats = computeLedgerWithRunningBalance();
+      const archiveDate = todayTransactions[0]?.date || getFormattedDate();
+      const txToClear = [...todayTransactions];
+
+      const archiveRecord = {
+        id: 'arch_' + Date.now(),
+        archiveDate,
+        openingBalance: Number(openingBalance) || 0,
+        totalDeposits: stats.totalDeposits,
+        totalWithdrawals: stats.totalWithdrawals,
+        closingBalance: stats.currentShopBalance,
+        totalTransactions: stats.totalTransactions,
+        transactions: stats.rows,
+        archivedAt: Date.now()
+      };
+
+      archivedDays.unshift(archiveRecord);
+      openingBalance = 0;
+      todayTransactions = [];
+      saveStateToLocal();
+      renderAll();
+      renderArchiveHistory();
+      switchTab('archive');
+      showToast(`Archived ${archiveDate} & reset Ledger!`);
+
+      if (db && currentUser) {
+        try {
+          const archiveColRef = collection(db, 'artifacts', appId, 'public', 'data', `jjsk_archive_${centerCode}`);
+          const metaDocRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_meta_${centerCode}`, 'dashboard');
+          await addDoc(archiveColRef, archiveRecord);
+          await Promise.all(
+            txToClear.map(tx => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', `jjsk_tx_${centerCode}`, tx.id)))
+          );
+          await setDoc(metaDocRef, { openingBalance: 0, updatedAt: Date.now() }, { merge: true });
+        } catch (err) {
+          console.error('Archive sync error:', err);
+        }
+      }
+    };
+
+    // -----------------------------------------------------------------------
+    // 11. ARCHIVE HISTORY & TAB NAVIGATION
+    // -----------------------------------------------------------------------
+    window.switchTab = function(tabName) {
+      const todayView = document.getElementById('todayView');
+      const archiveView = document.getElementById('archiveView');
+      const todayBtn = document.getElementById('tabTodayBtn');
+      const archiveBtn = document.getElementById('tabArchiveBtn');
+      const quickFilterBar = document.getElementById('quickFilterBar');
+
+      if (tabName === 'today') {
+        todayView.classList.remove('hidden');
+        archiveView.classList.add('hidden');
+        quickFilterBar.classList.remove('hidden');
+        todayBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-sm transition flex items-center gap-2';
+        archiveBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-2';
+      } else {
+        todayView.classList.add('hidden');
+        archiveView.classList.remove('hidden');
+        quickFilterBar.classList.add('hidden');
+        archiveBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-indigo-700 to-purple-800 text-white shadow-sm transition flex items-center gap-2';
+        todayBtn.className = 'px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 text-slate-700 hover:bg-slate-200 transition flex items-center gap-2';
+        renderArchiveHistory();
+      }
+    };
+
+    window.renderArchiveHistory = function() {
+      document.getElementById('tabArchiveCount').textContent = archivedDays.length;
+
+      const query = (document.getElementById('archiveSearchInput').value || '').trim().toLowerCase();
+      const container = document.getElementById('archiveListContainer');
+      const emptyState = document.getElementById('archiveEmptyState');
+
+      const filtered = query
+        ? archivedDays.filter(day => {
+            const matchDate = (day.archiveDate || '').toLowerCase().includes(query);
+            const matchTx = (day.transactions || []).some(t =>
+              (t.customerName || '').toLowerCase().includes(query) ||
+              (t.village || '').toLowerCase().includes(query) ||
+              (t.mobile || '').toLowerCase().includes(query) ||
+              (t.aadhaar || '').toLowerCase().includes(query)
+            );
+            return matchDate || matchTx;
+          })
+        : archivedDays;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      container.innerHTML = filtered.map(day => {
+        const txRows = (day.transactions || []).map((t, i) => `
+          <tr class="hover:bg-indigo-50/40 transition">
+            <td class="py-2.5 px-3 font-extrabold text-indigo-700">${i + 1}</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-600 whitespace-nowrap">${escapeHtml(t.time)}</td>
+            <td class="py-2.5 px-3 font-extrabold text-slate-900">${escapeHtml(t.customerName)}</td>
+            <td class="py-2.5 px-3 text-slate-700">${escapeHtml(t.village)}</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-700">${escapeHtml(t.mobile || '—')}</td>
+            <td class="py-2.5 px-3 font-mono text-xs text-slate-700 whitespace-nowrap">${escapeHtml(t.aadhaar || '—')}</td>
+            <td class="py-2.5 px-3 whitespace-nowrap">${getPaymentModeBadge(t.paymentMethod)} <span class="text-xs font-bold text-slate-700 ml-1">${escapeHtml(t.txType)}</span></td>
+            <td class="py-2.5 px-3 text-right font-black text-emerald-600">${t.depositAmt > 0 ? '+' + formatCurrency(t.depositAmt) : '—'}</td>
+            <td class="py-2.5 px-3 text-right font-black text-rose-600">${t.withdrawalAmt > 0 ? '-' + formatCurrency(t.withdrawalAmt) : '—'}</td>
+            <td class="py-2.5 px-3 text-right font-black text-indigo-950 bg-amber-50/60">${formatCurrency(t.shopRemainingBalance)}</td>
+          </tr>
+        `).join('');
+
+        return `
+          <div class="rounded-2xl border-2 border-indigo-200 overflow-hidden shadow-sm bg-white">
+            <div class="bg-gradient-to-r from-indigo-950 via-blue-900 to-purple-900 text-white px-4 sm:px-6 py-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+              <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-black tracking-wide">
+                <span class="bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 px-3 py-1 rounded-xl uppercase shadow">
+                  DATE: ${escapeHtml(day.archiveDate)}
+                </span>
+                <span class="px-2.5 py-1 rounded-lg bg-white/10">OPENING: <span class="text-purple-200">${formatCurrency(day.openingBalance)}</span></span>
+                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-200">DEPOSITS: ${formatCurrency(day.totalDeposits)}</span>
+                <span class="px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-200">WITHDRAWALS: ${formatCurrency(day.totalWithdrawals)}</span>
+                <span class="px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-300">CLOSING: ${formatCurrency(day.closingBalance)}</span>
+              </div>
+
+              <button type="button" onclick="exportSingleArchiveCSV('${day.id}')"
+                class="self-start lg:self-auto px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black shadow transition flex items-center gap-1.5">
+                <i class="fa-solid fa-file-csv"></i>
+                <span>Download CSV</span>
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="bg-indigo-100 text-indigo-950 text-[11px] font-extrabold uppercase border-b border-indigo-200">
+                    <th class="py-2.5 px-3">#</th>
+                    <th class="py-2.5 px-3">Time</th>
+                    <th class="py-2.5 px-3">Customer Name</th>
+                    <th class="py-2.5 px-3">Village</th>
+                    <th class="py-2.5 px-3">Mobile</th>
+                    <th class="py-2.5 px-3">Aadhaar Number</th>
+                    <th class="py-2.5 px-3">Mode &amp; Type</th>
+                    <th class="py-2.5 px-3 text-right">Deposit (₹)</th>
+                    <th class="py-2.5 px-3 text-right">Withdrawal (₹)</th>
+                    <th class="py-2.5 px-3 text-right">Shop Bal (₹)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  ${txRows || `<tr><td colspan="10" class="py-4 text-center text-slate-400">No entries</td></tr>`}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+      }).join('');
+    };
+
+    // -----------------------------------------------------------------------
+    // 12. CSV EXPORTS & JSON BACKUP / RESTORE
+    // -----------------------------------------------------------------------
+    function downloadCsvFile(filename, rowsArray) {
+      const csvContent = rowsArray
+        .map(row => row.map(cell => `"${String(cell ?? '').replace(/"/g, '""')}"`).join(','))
+        .join('\n');
+      const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    window.exportCurrentCSV = function() {
+      const stats = computeLedgerWithRunningBalance();
+      const dateStr = todayTransactions[0]?.date || getFormattedDate();
+      const header = ['#', 'Date', 'Time', 'Customer Name', 'Village', 'Mobile', 'Aadhaar Number', 'Type', 'Mode', 'Deposit', 'Withdrawal', 'Shop Remaining Balance', 'Remarks'];
+      const dataRows = stats.rows.map(r => [
+        r.serialNo, r.date, r.time, r.customerName, r.village, r.mobile || '', r.aadhaar || '', r.txType, r.paymentMethod,
+        r.depositAmt, r.withdrawalAmt, r.shopRemainingBalance, r.remarks || ''
+      ]);
+      downloadCsvFile(`JJSK_Live_Ledger_${dateStr}.csv`, [header, ...dataRows]);
+      showToast('Exported Transaction History to CSV!');
+    };
+
+    window.exportSingleArchiveCSV = function(archiveId) {
+      const day = archivedDays.find(d => d.id === archiveId);
+      if (!day) return;
+      const header = ['#', 'Date', 'Time', 'Customer Name', 'Village', 'Mobile', 'Aadhaar Number', 'Type', 'Mode', 'Deposit', 'Withdrawal', 'Shop Remaining Balance', 'Remarks'];
+      const dataRows = (day.transactions || []).map((r, idx) => [
+        idx + 1, day.archiveDate, r.time, r.customerName, r.village, r.mobile || '', r.aadhaar || '', r.txType, r.paymentMethod,
+        r.depositAmt, r.withdrawalAmt, r.shopRemainingBalance, r.remarks || ''
+      ]);
+      downloadCsvFile(`JJSK_Archive_${day.archiveDate}.csv`, [header, ...dataRows]);
+      showToast(`Exported ${day.archiveDate} CSV!`);
+    };
+
+    window.exportAllArchivesCSV = function() {
+      if (archivedDays.length === 0) {
+        showToast('No archived days to export.', 'info');
+        return;
+      }
+      const header = ['Archive Date', 'Opening Bal', 'Closing Bal', '#', 'Time', 'Customer Name', 'Village', 'Mobile', 'Aadhaar Number', 'Type', 'Mode', 'Deposit', 'Withdrawal', 'Shop Remaining Balance', 'Remarks'];
+      const allRows = [];
+      archivedDays.forEach(day => {
+        (day.transactions || []).forEach((r, idx) => {
+          allRows.push([
+            day.archiveDate, day.openingBalance, day.closingBalance,
+            idx + 1, r.time, r.customerName, r.village, r.mobile || '', r.aadhaar || '', r.txType, r.paymentMethod,
+            r.depositAmt, r.withdrawalAmt, r.shopRemainingBalance, r.remarks || ''
+          ]);
+        });
+      });
+      downloadCsvFile(`JJSK_Full_Archive_History_${getFormattedDate()}.csv`, [header, ...allRows]);
+      showToast('Full Archive History exported!');
+    };
+
+    window.downloadJsonBackup = function() {
+      const backupObj = {
+        centerCode,
+        exportedAt: new Date().toISOString(),
+        openingBalance,
+        villages: villagesList,
+        paymentMethods: paymentMethodsList,
+        todayTransactions,
+        archivedDays
+      };
+      const blob = new Blob([JSON.stringify(backupObj, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `JJSK_Backup_${centerCode}_${getFormattedDate()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Full JSON Backup downloaded!');
+    };
+
+    window.handleJsonRestore = async function(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+
+        if (typeof parsed.openingBalance === 'number') {
+          openingBalance = parsed.openingBalance;
+        }
+        if (Array.isArray(parsed.villages) && parsed.villages.length > 0) {
+          villagesList = parsed.villages;
+        }
+        if (Array.isArray(parsed.paymentMethods) && parsed.paymentMethods.length > 0) {
+          paymentMethodsList = parsed.paymentMethods;
+        }
+        if (Array.isArray(parsed.todayTransactions)) {
+          todayTransactions = parsed.todayTransactions;
+        }
+        if (Array.isArray(parsed.archivedDays)) {
+          archivedDays = parsed.archivedDays;
+        }
+
+        saveStateToLocal();
+        renderVillagesDatalist();
+        renderVillagesModalList();
+        renderMethodsDropdown();
+        renderMethodsModalList();
+        renderAll();
+        renderArchiveHistory();
+
+        if (db && currentUser) {
+          const metaDocRef = doc(db, 'artifacts', appId, 'public', 'data', `jjsk_meta_${centerCode}`, 'dashboard');
+          const txColRef = collection(db, 'artifacts', appId, 'public', 'data', `jjsk_tx_${centerCode}`);
+          const archiveColRef = collection(db, 'artifacts', appId, 'public', 'data', `jjsk_archive_${centerCode}`);
+
+          await setDoc(metaDocRef, { openingBalance, villages: villagesList, paymentMethods: paymentMethodsList, updatedAt: Date.now() }, { merge: true });
+          for (const tx of todayTransactions) {
+            const { id, ...txData } = tx;
+            await addDoc(txColRef, txData);
+          }
+          for (const day of archivedDays) {
+            const { id, ...dayData } = day;
+            await addDoc(archiveColRef, dayData);
+          }
+        }
+
+        showToast('Backup restored successfully!');
+      } catch (err) {
+        console.error('Restore error:', err);
+        showToast('Invalid JSON backup file.', 'error');
+      } finally {
+        event.target.value = '';
+      }
+    };
+
+    // -----------------------------------------------------------------------
+    // 13. BOOTSTRAP
+    // -----------------------------------------------------------------------
+    startLiveClock();
+    initFirebase();
+  </script>
+</body>
+</html>
